@@ -1,0 +1,54 @@
+{
+  "name": "react-daterangepicker",
+  "version": "1.0.0",
+  "description": "Simple date and time range picker for react apps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "rimraf ./demo/dist && ./node_modules/.bin/webpack-serve --config ./webpack.config-demo.js",
+    "build": "rimraf ./dist && ./node_modules/.bin/webpack -p",
+    "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhil-001mehta/react-datetimerangepicker.git"
+  },
+  "keywords": [
+    "react",
+    "datepicker",
+    "daterange",
+    "daterangepicker",
+    "timepicker",
+    "input-control"
+  ],
+  "author": "Nikhil Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikhil-001mehta/react-datetimerangepicker/issues"
+  },
+  "homepage": "https://nikhil-001mehta.github.io/react-daterangepicker",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "copy-webpack-plugin": "^4.5.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "prop-types": "^15.6.2",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-serve": "^2.0.2"
+  },
+  "dependencies": {
+    "moment": "^2.22.2",
+    "moment-range": "^4.0.1",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
+  },
+  "peerDependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  }
+}
