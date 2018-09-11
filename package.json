@@ -4,10 +4,31 @@
   "description": "Simple date and time range picker for react apps",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/jest",
     "serve": "rimraf ./demo/dist && ./node_modules/.bin/webpack-serve --config ./webpack.config-demo.js",
     "build": "rimraf ./dist && ./node_modules/.bin/webpack -p",
     "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/testSetup/enzyme.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/testSetup",
+      "<rootDir>/demo"
+    ],
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/demo/**",
+      "!**/dist/**",
+      "!**/test/**",
+      "!**/webpack.**",
+      "!**/testCoverage/**",
+      "!**/testSetup/**"
+    ],
+    "collectCoverage": true,
+    "clearMocks": true,
+    "coverageDirectory": "testCoverage"
   },
   "repository": {
     "type": "git",
@@ -32,10 +53,15 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.2",
     "copy-webpack-plugin": "^4.5.2",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "prop-types": "^15.6.2",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
