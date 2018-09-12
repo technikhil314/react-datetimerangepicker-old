@@ -1,5 +1,5 @@
 {
-  "name": "@technikhil/react-daterangepicker",
+  "name": "react-datetimerangepicker",
   "version": "1.0.0",
   "description": "Simple date and time range picker for react apps",
   "main": "index.js",
