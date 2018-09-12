@@ -2,7 +2,6 @@ let webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
-    watch: true,
     resolve: {
         extensions: ['.js', '.jsx']
     },
