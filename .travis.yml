@@ -1,22 +1,25 @@
 language: node_js
 node_js:
-  - "8.11.3"
+- 8.11.3
 script:
-  - npm test
-  - npm run build
-  - npm run build-demo
+- npm test
+- npm run build
+- npm run build-demo
 before_deploy:
-  - touch .npmignore
+- touch .npmignore
 deploy:
-  - provider: pages
-    local-dir: ./demo/dist
-    skip-cleanup: true
-    github-token: $GITHUB_TOKEN
-    keep-history: true
-    on:
-      branch: master
-  - provider: npm
-    email: "nikhil.001mehta@gmail.com"
-    api_key: $NPM_TOKEN
-    on:
-      tags: true
+  provider: npm
+  email: nikhil.001mehta@gmail.com
+  api_key:
+    secure: Mf3gnt2TRne6rdibF6bQ/0UxYlgHj8AcK64FjWTi8ljai2OIn5OPMFllUu3xMqlgu7TBZ0knr7ucNJkzr85ObtL7GDk59mwTh0En1fLDIvDYRb+610w3rTmCpohSF9BjqNirYSxpTlYKgIEpQw5wocTrr8snPM/sjNCtHSBUAc1QYcUYeUEjdcLiiOGtgymubjzoF50If/ctVDO8tsJLj83WNjTHQ5jOR1Ev8U0FVrsWldsDnoVm1tucqjj+lrjSpCAxYsK0j2UOb5COUOMzHZuzoXKDbURFtNhVlKlV3tMbnXrLI9esEueHCDHFCd65Z3T+khems4ULZONRx4lT/JM2kdtdZxjfrvt2jorkvvjBWC8qjFJ9Po7yn8sZUVnMyggleWKosrTkqlw+hU69Y9blO/OSbVVewR/5ZleLjQqNCIjZWOnDHd4HBpZ95WaZ5/PVnz73hYRCG68EY3i653HlGakCu5YsmanyDNocg12WvOxTGEiuzD+UgbW1MC5X/iEC6HZLMPSiGmVSXmkNwuKrCw0Ys9hGnzP/MaSjri0GlRRna6n0QIiYkufqHPzjib/5kWWnYejajbqiq7m8V8ePVIXNxOp3gFH+FDSZKN0sKOQQ+VBXtE37TfbaQxj0JUAH9KmHPOdUrCb0cfvzkh3Li1/KvGBlEfgBFk1oiN4=
+  on:
+    tags: true
+    repo: nikhil-001mehta/react-datetimerangepicker
+deploy:
+  provider: pages
+  local-dir: ./demo/dist
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
