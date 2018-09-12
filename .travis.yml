@@ -5,11 +5,18 @@ script:
   - npm test
   - npm run build
   - npm run build-demo
+before_deploy:
+  - touch .npmignore
 deploy:
-  provider: pages
-  local-dir: ./demo/dist
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: master
+  - provider: pages
+    local-dir: ./demo/dist
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    on:
+      branch: master
+  - provider: npm
+    email: "nikhil.001mehta@gmail.com"
+    api_key: $NPM_TOKEN
+    on:
+      tags: true

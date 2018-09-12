@@ -30,6 +30,9 @@
     "clearMocks": true,
     "coverageDirectory": "testCoverage"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nikhil-001mehta/react-datetimerangepicker.git"
