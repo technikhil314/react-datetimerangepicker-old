@@ -1,12 +1,15 @@
 language: node_js
 node_js:
-- 8.11.3
+  - 8.11.3
 script:
-- npm test
-- npm run build
-- npm run build-demo
+  - npm test
+  - npm run build
+  - npm run build-demo
 before_deploy:
-- touch .npmignore
+  - touch .npmignore
+  - rm -rf node_modules
+  - cp ./dist/* .
+  - rm -rf !(index.js|index.js.map|package.json|demo/dist/demo-*.js|demo/dist/demo-*.js.map|demo/dist/index.html)
 deploy:
   - provider: npm
     email: nikhil.001mehta@gmail.com
