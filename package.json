@@ -41,6 +41,10 @@
     "collectCoverage": true,
     "clearMocks": true,
     "coverageDirectory": "testCoverage",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
     "coverageThreshold": {
       "global": {
         "branches": 80,
@@ -89,6 +93,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^1.0.0-rc.14",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "lint-staged": "^7.2.2",
     "node-sass": "^4.9.3",
