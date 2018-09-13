@@ -9,8 +9,8 @@ before_deploy:
   - touch .npmignore
 deploy:
   - provider: script
-    skip-cleanup: true
     script: bash deploy.sh
+    skip-cleanup: true
     on:
       branch: master
   - provider: pages
