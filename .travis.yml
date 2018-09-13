@@ -6,7 +6,8 @@ script:
   - npm run build
   - npm run build-demo
 before_deploy:
-  - cd dist
+  - touch .npmignore
+  - cd ./dist
 deploy:
   - provider: npm
     email: nikhil.001mehta@gmail.com
