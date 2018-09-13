@@ -70,7 +70,7 @@
   "bugs": {
     "url": "https://github.com/nikhil-001mehta/react-datetimerangepicker/issues"
   },
-  "homepage": "https://nikhil-001mehta.github.io/react-daterangepicker",
+  "homepage": "https://nikhil-001mehta.github.io/react-datetimerangepicker",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
