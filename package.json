@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikhil-001mehta/react-datetimerangepicker.git"
+    "url": "git+https://github.com/technikhil314/react-datetimerangepicker.git"
   },
   "keywords": [
     "react",
@@ -72,9 +72,9 @@
   "author": "Nikhil Mehta",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nikhil-001mehta/react-datetimerangepicker/issues"
+    "url": "https://github.com/technikhil314/react-datetimerangepicker/issues"
   },
-  "homepage": "https://nikhil-001mehta.github.io/react-datetimerangepicker",
+  "homepage": "https://technikhil314.github.io/react-datetimerangepicker",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
