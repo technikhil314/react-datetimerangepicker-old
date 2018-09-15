@@ -8,12 +8,7 @@ export default class ReactDateRangePicker extends Component {
     this.handleInsideClick = ::this.handleInsideClick;
     this.handleOutsideClick = ::this.handleOutsideClick;
   }
-  handleInsideClick() {
-    return {
-      ...this
-    };
-    console.log({ ...this });
-  }
+  handleInsideClick() {}
   handleOutsideClick() {}
   render() {
     this.handleInsideClick();
