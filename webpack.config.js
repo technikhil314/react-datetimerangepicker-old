@@ -1,12 +1,17 @@
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const extractTextPlugin = require("extract-text-webpack-plugin");
-
+const path = require("path");
 module.exports = {
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
+    alias: {
+      "@components": path.resolve("src/js/components"),
+      "@common": path.resolve("src/js/common"),
+      "@styles": path.resolve("src/scss")
+    }
   },
   entry: {
-    index: "./index.jsx"
+    index: "./src/index.jsx"
   },
   output: {
     filename: "[name].js",

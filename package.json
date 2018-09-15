@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack -p --watch\" \"./node_modules/.bin/webpack-serve --config ./webpack.config-demo.js\"",
+    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-serve --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack -p --watch\"",
     "build": "./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/webpack -p",
     "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
   },
@@ -43,7 +43,10 @@
     "coverageDirectory": "testCoverage",
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less|scss)$": "identity-obj-proxy"
+      "\\.(css|less|scss)$": "identity-obj-proxy",
+      "@components/(.*)$": "<rootDir>/src/js/components/$1",
+      "@common/(.*)$": "<rootDir>/src/js/common/$1",
+      "@styles/(.*)$": "<rootDir>/src/scss/$1"
     },
     "coverageThreshold": {
       "global": {
@@ -83,6 +86,7 @@
     "babel-core": "^7.0.0-0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.2",
+    "babel-plugin-transform-function-bind": "^6.22.0",
     "concurrently": "^4.0.1",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",

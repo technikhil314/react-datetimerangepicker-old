@@ -1,4 +1,9 @@
+<h1>
+    This is work in progress. Be patient to see first working component in action.
+</h1>
+
 # angular-2-daterangepicker
+
 <div>
 	<a href="https://www.npmjs.com/package/angular-2-daterangepicker?activeTab=readme">
 		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
@@ -11,7 +16,8 @@
 
 </div>
 
-# About this package 
+# About this package
+
 <p>
 Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
 </p>
@@ -26,6 +32,7 @@ This is a work in progress and you are always welcome to help me going forward w
 </p>
 
 # Announcements
+
 <div style="background:grey;color:black">
 <ul>
 <li>
@@ -86,10 +93,13 @@ This is a work in progress and you are always welcome to help me going forward w
 </div>
 
 # Getting Started
+
 ## Install
+
 ```bash
-$ npm install angular-2-daterangepicker 
+$ npm install angular-2-daterangepicker
 ```
+
 or
 
 ```bash
@@ -97,31 +107,32 @@ $ bower install angular-2-daterangepicker
 ```
 
 ## Demo
+
 see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
 or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module or You can play around with the code on stackblitz <a href="https://stackblitz.com/edit/angular-daterangepicker">here</a>
 
 # Usage
+
 ## How to make it work for you
+
 Import DaterangepickerModule into your module as following
 
 ```ts
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { DaterangepickerModule } from 'angular-2-daterangepicker';
+import { NgModule } from "@angular/core";
+import { AppComponent } from "./app.component";
+import { BrowserModule } from "@angular/platform-browser";
+import { DaterangepickerModule } from "angular-2-daterangepicker";
 @NgModule({
-	imports: [BrowserModule, DaterangepickerModule],
-	declarations: [ AppComponent ],
-	bootstrap: [AppComponent]
+  imports: [BrowserModule, DaterangepickerModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {
-	
-}
+export class AppModule {}
 ```
 
 ## Options
-Currently, very minimum number of options are available but I will keep on developing and adding more and more options
 
+Currently, very minimum number of options are available but I will keep on developing and adding more and more options
 
 <table>
     <thead>
@@ -256,30 +267,36 @@ Currently, very minimum number of options are available but I will keep on devel
     </tbody>
 </table>
 
-### Custom Range 
+### Custom Range
+
 For custom range, Pass options as below. For this you need to pass <a href="https://momentjs.com/">momentjs</a> objects.
+
 ```js
-        preDefinedRanges: [{
-            name: 'Day After tomorrow',
-                value: {
-                    start: moment().add(2, 'days'),
-                    end: moment().add(2, 'days'),
-                }
-		    },{
-            name: 'This week',
-            value: {
-                start: moment(),
-                end: moment().add(7, 'days'),
-            }
-        }]
+preDefinedRanges: [
+  {
+    name: "Day After tomorrow",
+    value: {
+      start: moment().add(2, "days"),
+      end: moment().add(2, "days")
+    }
+  },
+  {
+    name: "This week",
+    value: {
+      start: moment(),
+      end: moment().add(7, "days")
+    }
+  }
+];
 ```
 
 All dates are supposed to be string and in format as you are passing.
-You can also 
+You can also
 
 ```ts
-import { Options } from 'angular-2-daterangepicker';
+import { Options } from "angular-2-daterangepicker";
 ```
+
 class for passing options to the component.
 
 ### Time Picker
@@ -309,48 +326,54 @@ Timepicker options expects an object containing following keys as timepicker opt
 
 ## Events
 
-Subscribe to rangeSelected event as 
+Subscribe to rangeSelected event as
 
 ```html
 <date-range-picker [class]="'col-md-12 form-control'" [options]="daterangepickerOptions" (rangeSelected)="rangeSelected($event)"></date-range-picker>
 ```
-the event listener will receive a javascript object conaining 
+
+the event listener will receive a javascript object conaining
+
 ```js
 {
-	start: 'moment object representing start date selected by user'
-	end: 'moment object representing end date selected by user'
+  start: "moment object representing start date selected by user";
+  end: "moment object representing end date selected by user";
 }
 ```
+
 and if you have set singleCalendar to true then the event listener will receive following
+
 ```js
 {
-	start: 'moment object representing date selected by user'
+  start: "moment object representing date selected by user";
 }
 ```
+
 ## How pass options to the component
+
 The input box automatically takes class of the date-range-picker tag
 
 ```ts
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-	selector: "my-datepicker-demo",
-	template: `
+  selector: "my-datepicker-demo",
+  template: `
 		<date-range-picker class="col-md-4" [options]="daterangepickerOptions" class="col-md-4">
 		</date-range-picker>
 	`
 })
-export class AppComponent{
-	daterangepickerOptions = {
-		startDate: '09/01/2017',
-		endDate: '09/02/2017',
-		format: 'DD/MM/YYYY'
-	}
+export class AppComponent {
+  daterangepickerOptions = {
+    startDate: "09/01/2017",
+    endDate: "09/02/2017",
+    format: "DD/MM/YYYY"
+  };
 }
-
 ```
 
-# Dependencies 
+# Dependencies
+
 [moment.js](http://momentjs.com/) version greater than 2.17.1<br/>
 [moment-range.js](https://github.com/gf3/moment-range) version 2.2.0 <br/>
 also you should have installed @types/node or [see here](http://stackoverflow.com/questions/36700693/typescript-error-in-angular2-code-cannot-find-name-module) for more information.
@@ -360,6 +383,7 @@ I suggest installing all the dependencies before this module
 
 If you are using bootstrap.css then just include the following styling in your code
 if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
+
 ```html
 <style>
         .daterangepicker-wrapper{
@@ -398,7 +422,7 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             width: 0px;
             border: 10px solid transparent;
             position: absolute;
-            border-bottom-color: #aaa; 
+            border-bottom-color: #aaa;
             top: -20px;
         }
 
@@ -411,7 +435,7 @@ if you do not want to include whole bootstrap.css then include [this css](https:
             border-bottom-color: #fff;
             top: -18px;
         }
-        
+
         .daterangepicker.open-left.tooltip-chevron:before{
             left: 10px;
         }
@@ -696,9 +720,11 @@ if you do not want to include whole bootstrap.css then include [this css](https:
 ```
 
 # Issues/Problems
+
 Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
 
 # Want to contribute. You are welcome!!! :)
+
 <ol>
 <li>Fork this repo</li>
 <li>npm install</li>
