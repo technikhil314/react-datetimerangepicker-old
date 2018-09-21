@@ -1,6 +1,7 @@
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const extractTextPlugin = require("extract-text-webpack-plugin");
 const path = require("path");
+const isDevServer = process.argv[2].indexOf("--watch") !== -1;
 module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
@@ -20,7 +21,14 @@ module.exports = {
     libraryTarget: "commonjs2"
   },
   devtool: "source-map",
-  mode: "development",
+  mode: isDevServer ? "development" : "production",
+  stats: isDevServer
+    ? {
+        all: false,
+        errors: true,
+        warnings: true
+      }
+    : "verbose",
   module: {
     rules: [
       {
@@ -59,6 +67,7 @@ module.exports = {
   ],
   externals: {
     react: "commonjs react",
-    "react-dom": "commonjs react-dom"
+    "react-dom": "commonjs react-dom",
+    "prop-types": "commonjs prop-types"
   }
 };

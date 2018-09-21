@@ -15,7 +15,9 @@ export default class ReactDateRangePicker extends Component {
     return (
       <div>
         Hello ReactDateRangePicker!!!
-        <OutsideClickDetector />
+        <OutsideClickDetector>
+          <div>Demo</div>
+        </OutsideClickDetector>
       </div>
     );
   }

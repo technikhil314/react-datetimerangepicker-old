@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const isDevServer = process.argv[1].indexOf("webpack-dev-server") !== -1;
 
 module.exports = {
   resolve: {
@@ -18,7 +19,14 @@ module.exports = {
     path: __dirname + "/demo/dist"
   },
   devtool: "source-map",
-  mode: "development",
+  mode: isDevServer ? "development" : "production",
+  stats: isDevServer
+    ? {
+        all: false,
+        errors: true,
+        warnings: true
+      }
+    : "verbose",
   module: {
     rules: [
       {
@@ -42,9 +50,16 @@ module.exports = {
       }
     })
   ],
-  serve: {
-    content: "./demo/dist",
-    hotClient: false,
-    hmr: false
+  devServer: {
+    inline: true,
+    hot: true,
+    stats: {
+      all: false,
+      errors: true,
+      warnings: true,
+      children: false,
+      chunks: false,
+      assets: false
+    }
   }
 };

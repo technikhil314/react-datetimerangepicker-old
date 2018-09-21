@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-serve --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack -p --watch\"",
+    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-dev-server --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack --watch\"",
     "build": "./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/webpack -p",
     "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
   },
@@ -118,7 +118,7 @@
     "style-loader": "^0.23.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
-    "webpack-serve": "^2.0.2"
+    "webpack-dev-server": "^3.1.8"
   },
   "dependencies": {
     "moment": "^2.22.2",
