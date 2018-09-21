@@ -15,7 +15,7 @@ module.exports = {
     demo: "./demo/demo.jsx"
   },
   output: {
-    filename: "[name]-[contentHash].js",
+    filename: isDevServer ? "[name].js" : "[name]-[contenthash].js",
     path: __dirname + "/demo/dist"
   },
   devtool: "source-map",
@@ -52,7 +52,7 @@ module.exports = {
   ],
   devServer: {
     inline: true,
-    hot: false,
+    hot: true,
     stats: {
       all: false,
       errors: true,

@@ -12,5 +12,5 @@ export default class InsideOutsideClickDetector extends Component {
 }
 
 InsideOutsideClickDetector.propTypes = {
-  children: PropTypes.array
+  children: PropTypes.object
 };
