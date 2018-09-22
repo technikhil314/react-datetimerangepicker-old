@@ -1,6 +1,11 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "presets": [
+    ["@babel/preset-env", {
+      "shippedProposals": true
+    }], "@babel/preset-react"
+  ],
   "plugins": [
-    "transform-function-bind"
+    "transform-function-bind",
+    "@babel/plugin-proposal-class-properties"
   ]
 }

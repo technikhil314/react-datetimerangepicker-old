@@ -1,6 +1,12 @@
 {
-  "extends": ["standard", "standard-react", "prettier", "eslint:recommended"],
-  "plugins": ["prettier", "react"],
+  "extends": [
+    "standard",
+    "standard-react",
+    "prettier",
+    "eslint:recommended",
+    "plugin:jest/recommended"
+  ],
+  "plugins": ["prettier", "react", "jest"],
   "rules": {
     "prettier/prettier": "error"
   },

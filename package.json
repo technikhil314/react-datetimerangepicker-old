@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest",
-    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-dev-server --hot --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack --watch\"",
+    "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-dev-server --hot --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack --watch --hot\"",
     "build": "./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/webpack -p",
     "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
   },
@@ -52,8 +52,8 @@
     "coverageThreshold": {
       "global": {
         "branches": 80,
-        "functions": 80,
-        "lines": 80,
+        "functions": 90,
+        "lines": 90,
         "statements": -10
       }
     }
@@ -81,6 +81,7 @@
   "homepage": "https://technikhil314.github.io/react-datetimerangepicker",
   "devDependencies": {
     "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
@@ -99,6 +100,7 @@
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.1",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prettier": "^2.6.2",
     "eslint-plugin-promise": "^4.0.1",
