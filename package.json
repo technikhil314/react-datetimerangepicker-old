@@ -75,8 +75,17 @@
     "datepicker",
     "daterange",
     "daterangepicker",
+    "datetimepicker",
+    "date time picker",
     "timepicker",
-    "input-control"
+    "input-control",
+    "datetimerangepicker",
+    "react-component",
+    "daterangepicker component",
+    "daterangepicker-component",
+    "react-components",
+    "timepicker component",
+    "timepicker-component"
   ],
   "author": "Nikhil Mehta",
   "license": "MIT",

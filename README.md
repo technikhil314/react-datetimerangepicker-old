@@ -1,25 +1,44 @@
 <h1>
     This is work in progress. Be patient to see first working component in action.
 </h1>
-
-# angular-2-daterangepicker
+<h1>react-daterangepicker</h1>
 
 <div>
-	<a href="https://www.npmjs.com/package/angular-2-daterangepicker?activeTab=readme">
-		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+    <a href="https://travis-ci.org/technikhil314/react-datetimerangepicker">
+		<img src="https://travis-ci.org/technikhil314/react-datetimerangepicker.svg?branch=master" width:"100%">
 	</a>
-	<a href="https://unpkg.com/angular-2-daterangepicker/index.js">
-		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fnikhil-001mehta%2Fangular-2-daterangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+    <a href='https://coveralls.io/github/technikhil314/react-datetimerangepicker?branch=master'>
+        <img src='https://coveralls.io/repos/github/technikhil314/react-datetimerangepicker/badge.svg?branch=master' alt='Coverage Status' width:"100%"/>
+    </a>
+    <a href="https://github.com/technikhil314/react-datetimerangepicker/issues">
+        <img src="https://img.shields.io/github/issues/technikhil314/react-datetimerangepicker.svg?style=social" width:"100%"/>
+    </a>
+    <a href="https://github.com/technikhil314/react-datetimerangepicker/network/members">
+        <img src="https://img.shields.io/github/forks/technikhil314/react-datetimerangepicker.svg?style=social" width:"100%"/>
+    </a>
+    <a href="https://github.com/technikhil314/react-datetimerangepicker/stargazers">
+        <img src="https://img.shields.io/github/stars/technikhil314/react-datetimerangepicker.svg?style=social" width:"100%"/>
+    </a>
+</div>
+<div>
+	<a href="https://www.npmjs.com/package/@technikhil/react-daterangepicker">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
 	</a>
-	<!-- <iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-	<iframe src="https://ghbtns.com/github-btn.html?user=nikhil-001mehta&repo=angular-2-daterangepicker&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe> -->
-
+	<a href="https://unpkg.com/@technikhil/react-daterangepicker/index.js">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+	</a>
+    <a href="https://yarnpkg.com/en/package/@technikhil/react-daterangepicker">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=yarn&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+	</a>
+    <a href="https://github.com/technikhil314/react-datetimerangepicker/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/technikhil314/react-datetimerangepicker.svg" width:"100%"/>
+    </a>
 </div>
 
 # About this package
 
 <p>
-Daterangepicker for Angular vX.X. Although the name of package is angular 2 it is compatible with angular v4 and v5
+Date/time rangepicker for React16 and above
 </p>
 <p>
 It is a fully responsive daterangepicker with or without bootstrap.css. See <a href="#responsive-css">responsive section </a> below for more details.
@@ -41,55 +60,7 @@ This is a work in progress and you are always welcome to help me going forward w
 		<li>Added option alwaysOpen to keep the flyout open always 1.1.47</li>
 	</ul>
 </li>
-<li>
-	Date: 19 May 2018
-	<ul>
-		<li>Added option timepicker to enable/disable timepicker in version 1.1.38</li>
-        <li>Added option disableBeforeStart to enable/disable dates in right calendar that are before selected from date in version 1.1.39</li>
-	</ul>
-</li>
-<li>
-	Date: 5 May 2018
-	<ul>
-		<li>Added option disabled to enable/disable input box in version 1.1.35</li>
-	</ul>
-</li>
-<li>
-	Date: 29 Apr 2018
-	<ul>
-		<li>Added option position to open flyout on left right or center in version 1.1.30</li>
-	</ul>
-</li>
-<li>
-	Date: 28 Apr 2018
-	<ul>
-		<li>Fixing a small CSS issue in version 1.1.28</li>
-	</ul>
-</li>
-<li>
-	Date: 31 Mar 2018
-	<ul>
-		<li>New option for singleCalendar added in version 1.1.27</li>
-	</ul>
-</li>
-<li>
-	Date: 25 Mar 2018
-	<ul>
-		<li>Made some changes in CSS and responsiveness in version v1.1.26</li>
-	</ul>
-</li>
-<li>
-	Date: 23 Mar 2018
-	<ul>
-		<li>New option for DisplayFormat added in version v1.1.25</li>
-	</ul>
-</li>
-<li>
-	Date: 20 Jan 2018
-	<ul>
-		<li>Module less than version v1.0.10 is no longer supported</li>
-	</ul>
-</li>
+</ul>
 </div>
 
 # Getting Started
@@ -97,18 +68,18 @@ This is a work in progress and you are always welcome to help me going forward w
 ## Install
 
 ```bash
-$ npm install angular-2-daterangepicker
+$ npm install @technikhil/react-daterangepicker
 ```
 
 or
 
-```bash
-$ bower install angular-2-daterangepicker
+```yarn
+$ yarn add @technikhil/react-daterangepicker
 ```
 
 ## Demo
 
-see [Demo](https://nikhil-001mehta.github.io/angular-2-daterangepicker/)
+see [Demo](https://technikhil314.github.io/react-datetimerangepicker/)
 or [Plunker](https://run.plnkr.co/plunks/BtKrOwY8nNLMIdAikubM/) to how to consume this module or You can play around with the code on stackblitz <a href="https://stackblitz.com/edit/angular-daterangepicker">here</a>
 
 # Usage
@@ -121,7 +92,7 @@ Import DaterangepickerModule into your module as following
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
-import { DaterangepickerModule } from "angular-2-daterangepicker";
+import { DaterangepickerModule } from "react-datetimerangepicker";
 @NgModule({
   imports: [BrowserModule, DaterangepickerModule],
   declarations: [AppComponent],
@@ -294,7 +265,7 @@ All dates are supposed to be string and in format as you are passing.
 You can also
 
 ```ts
-import { Options } from "angular-2-daterangepicker";
+import { Options } from "react-datetimerangepicker";
 ```
 
 class for passing options to the component.
@@ -382,7 +353,7 @@ I suggest installing all the dependencies before this module
 # Responsive CSS
 
 If you are using bootstrap.css then just include the following styling in your code
-if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/nikhil-001mehta/angular-2-daterangepicker/master/daterangepicker-component.css) in your code.
+if you do not want to include whole bootstrap.css then include [this css](https://raw.githubusercontent.com/technikhil314/react-datetimerangepicker/master/daterangepicker-component.css) in your code.
 
 ```html
 <style>
@@ -721,18 +692,15 @@ if you do not want to include whole bootstrap.css then include [this css](https:
 
 # Issues/Problems
 
-Please let me know if you are facing any issues [here](https://github.com/nikhil-001mehta/angular-2-daterangepicker/issues)
+Please let me know if you are facing any issues [here](https://github.com/technikhil314/react-datetimerangepicker/issues)
 
 # Want to contribute. You are welcome!!! :)
 
 <ol>
-<li>Fork this repo</li>
-<li>npm install</li>
-<li>Copy all files from <a href="https://gist.github.com/nikhil-001mehta/7a43a4da53ed9809fd6682a340ede618" target="_blank">this gist</a> to your local folder. And do not add them to git index otherwise they will appear in your pull requests.</li>
-<li> run "npm install -g typescript typescript-formatter lite-server concurrently rimraf"</li>
-<li>run "npm start"</li>
-<li>open browser at <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></li>
-<li>You are all set.</li>
-<li>Add features. Fix issues. Open Pull requests.</li>
-<li>Remember not to include files from gist in your pull requests</li>
+    <li>Fork this repo</li>
+    <li>"npm install" or "yarn install"</li>
+    <li>run "npm run serve" or "yarn serve"</li>
+    <li>open browser at <a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a></li>
+    <li>You are all set.</li>
+    <li>Add features. Fix issues. Open Pull requests.</li>
 </ol>
