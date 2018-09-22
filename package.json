@@ -4,7 +4,7 @@
   "description": "Simple date and time range picker for react apps",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jest",
+    "test": "./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/jest --coverage --coverageReporters=text-lcov | ./node_modules/.bin/coveralls",
     "serve": "./node_modules/.bin/rimraf ./demo/dist && ./node_modules/.bin/concurrently \"./node_modules/.bin/webpack-dev-server --hot --config ./webpack.config-demo.js\" \"./node_modules/.bin/webpack --watch --hot\"",
     "build": "./node_modules/.bin/rimraf ./dist && ./node_modules/.bin/webpack -p",
     "build-demo": "rimraf ./demo/dist && ./node_modules/.bin/webpack -p --config ./webpack.config-demo.js"
@@ -27,6 +27,10 @@
     "testPathIgnorePatterns": [
       "<rootDir>/testSetup",
       "<rootDir>/demo"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text"
     ],
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
@@ -92,6 +96,7 @@
     "babel-plugin-transform-function-bind": "^6.22.0",
     "concurrently": "^4.0.1",
     "copy-webpack-plugin": "^4.5.2",
+    "coveralls": "^3.0.2",
     "css-loader": "^1.0.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",

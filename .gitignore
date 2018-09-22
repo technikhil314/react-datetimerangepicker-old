@@ -64,3 +64,4 @@ typings/
 testCoverage/
 dist/
 demo/dist/
+.coveralls.yml
