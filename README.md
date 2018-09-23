@@ -22,16 +22,16 @@
 </div>
 <div>
 	<a href="https://www.npmjs.com/package/@technikhil/react-daterangepicker">
-		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=npm&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v&colorB=blue" width:"100%">
 	</a>
 	<a href="https://unpkg.com/@technikhil/react-daterangepicker/index.js">
-		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=unpkg&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v&colorB=blue" width:"100%">
 	</a>
     <a href="https://yarnpkg.com/en/package/@technikhil/react-daterangepicker">
-		<img src="https://img.shields.io/badge/dynamic/json.svg?label=yarn&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v" width:"100%">
+		<img src="https://img.shields.io/badge/dynamic/json.svg?label=yarn&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.version&prefix=v&colorB=blue" width:"100%">
 	</a>
     <a href="https://github.com/technikhil314/react-datetimerangepicker/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/technikhil314/react-datetimerangepicker.svg" width:"100%"/>
+        <img src="https://img.shields.io/badge/dynamic/json.svg?label=License&uri=https%3A%2F%2Fraw.githubusercontent.com%2Ftechnikhil314%2Freact-datetimerangepicker%2Fmaster%2Fpackage.json&query=%24.license&colorB=000000&colorA=0b5777" width:"100%"/>
     </a>
 </div>
 

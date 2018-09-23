@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDateRangePicker from "../dist";
 
 export default class DemoApp extends Component {
@@ -9,10 +9,10 @@ export default class DemoApp extends Component {
   demo() {}
   render() {
     return (
-      <div>
+      <Fragment>
         Hello DemoApp
         <ReactDateRangePicker />
-      </div>
+      </Fragment>
     );
   }
 }

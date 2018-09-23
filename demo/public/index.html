@@ -5,12 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% for(var i=0;i<htmlWebpackPlugin.files.css.length;i++) { %>
+    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.css[i] %>">
+    <% } %>
+    <link rel="stylesheet" type="text/css" href="../dist/styles.css">
     <title>React Date Range Picker</title>
 </head>
 
 <body>
     <h1>Demo</h1>
     <div id="app"></div>
+    <% for(var i=0;i<htmlWebpackPlugin.files.js.length;i++) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.js[i] %>"></script>
+    <% } %>
 </body>
 
 </html>

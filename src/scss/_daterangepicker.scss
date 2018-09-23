@@ -1,0 +1,42 @@
+.daterangepicker {
+    position: relative;
+
+    &__input {
+        height: 40px;
+    }
+
+    &__flyout {
+        display: inline-block;
+        position: absolute;
+        top: 40px;
+        min-width: 550px;
+        min-height: 300px;
+        box-shadow: 0 0 2px 2px $box-shadow;
+        display: none;
+        border-radius: 5px;
+
+        &:before {
+            content: "";
+            position: absolute;
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent $box-shadow;
+            top: -10px;
+            left: 10px;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            border-width: 0 8px 8px;
+            border-style: solid;
+            border-color: transparent transparent $white;
+            top: -8px;
+            left: 12px;
+        }
+    }
+
+    &__flyout--open {
+        display: block;
+    }
+}

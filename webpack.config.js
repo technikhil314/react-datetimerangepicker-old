@@ -2,6 +2,12 @@ const copyWebpackPlugin = require("copy-webpack-plugin");
 const extractTextPlugin = require("extract-text-webpack-plugin");
 const path = require("path");
 const isDevServer = process.argv[2].indexOf("--watch") !== -1;
+let extractTextPluginInstance = new extractTextPlugin({
+  filename: "styles.css",
+  disable: false,
+  allChunks: true
+});
+
 module.exports = {
   resolve: {
     extensions: [".js", ".jsx"],
@@ -43,7 +49,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: extractTextPlugin.extract({
+        use: extractTextPluginInstance.extract({
           fallback: "style-loader",
           use: ["css-loader", "sass-loader"]
         })
@@ -63,7 +69,7 @@ module.exports = {
         toType: "file"
       }
     ]),
-    new extractTextPlugin("styles.css")
+    extractTextPluginInstance
   ],
   externals: {
     react: "commonjs react",

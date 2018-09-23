@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "@styles/styles.scss";
 import OutsideClickDetector from "@common/insideOutsideClickDetector";
-import { classNames } from "./js/common/utils";
+import { classNames } from "@common/utils";
 
 export default class ReactDateRangePicker extends Component {
   constructor(props) {
@@ -16,6 +16,8 @@ export default class ReactDateRangePicker extends Component {
       this.setState({
         showFlyout: isInsideClick
       });
+    } else {
+      this.setDefaultFlyoutClassName();
     }
   }
   setDefaultFlyoutClassName() {
@@ -25,13 +27,13 @@ export default class ReactDateRangePicker extends Component {
   }
   render() {
     let flyoutClassNames = classNames({
-      "daterangepicker-flyout": true,
-      open: this.state.showFlyout
+      daterangepicker__flyout: true,
+      "daterangepicker__flyout--open": this.state.showFlyout
     });
     return (
       <OutsideClickDetector clickHandler={this.insideOutSideClickHandler}>
         <div className="daterangepicker">
-          <input type="text" className="daterangepicker-input" />
+          <input type="text" className="daterangepicker__input" />
           <div className={flyoutClassNames} />
         </div>
       </OutsideClickDetector>

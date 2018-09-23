@@ -3,13 +3,31 @@ import { shallow, mount } from "enzyme";
 import React from "react";
 
 describe("insideoutsideclickdetector component", () => {
-  it("should render properly", () => {
-    const wrapper = shallow(
-      <InsideOutsideClickDetector>
+  let wrapper,
+    mockClickHandler = jest.fn();
+  beforeEach(() => {
+    wrapper = shallow(
+      <InsideOutsideClickDetector clickHandler={mockClickHandler}>
         <div>Demo</div>
       </InsideOutsideClickDetector>
     );
+  });
+  it("should render properly", () => {
     expect(wrapper).toHaveLength(1);
+  });
+
+  it("should add click event listener on document", () => {
+    const map = {};
+    const mockAddEventListener = jest.fn((event, cb) => {
+      map[event] = cb;
+    });
+    document.addEventListener = mockAddEventListener;
+    wrapper = shallow(
+      <InsideOutsideClickDetector clickHandler={mockClickHandler}>
+        <div>Demo</div>
+      </InsideOutsideClickDetector>
+    );
+    expect(mockAddEventListener).toHaveBeenCalled();
   });
 
   describe("should handle document click", () => {
