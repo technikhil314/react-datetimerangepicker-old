@@ -4,16 +4,27 @@ import React from "react";
 
 describe("insideoutsideclickdetector component", () => {
   let wrapper,
-    mockClickHandler = jest.fn();
+    mockClickHandler = jest.fn(),
+    testClassName = "testClass";
   beforeEach(() => {
     wrapper = shallow(
-      <InsideOutsideClickDetector clickHandler={mockClickHandler}>
+      <InsideOutsideClickDetector
+        clickHandler={mockClickHandler}
+        className={testClassName}
+      >
         <div>Demo</div>
       </InsideOutsideClickDetector>
     );
   });
   it("should render properly", () => {
     expect(wrapper).toHaveLength(1);
+  });
+
+  it("should render properly with className", () => {
+    let wrapperDiv = wrapper.find(
+      `.${testClassName}.insideOutsideClickHandler-wrapper`
+    );
+    expect(wrapperDiv).toHaveLength(1);
   });
 
   it("should add click event listener on document", () => {

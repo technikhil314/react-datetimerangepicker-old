@@ -1,7 +1,9 @@
+import { PropTypes } from "prop-types";
 import React, { Component } from "react";
-import "@styles/styles.scss";
 import OutsideClickDetector from "@common/insideOutsideClickDetector";
 import { classNames } from "@common/utils";
+import Calendar from "@components/calendar";
+import "@styles/styles.scss";
 
 export default class ReactDateRangePicker extends Component {
   constructor(props) {
@@ -28,18 +30,35 @@ export default class ReactDateRangePicker extends Component {
   render() {
     let flyoutClassNames = classNames({
       daterangepicker__flyout: true,
-      "daterangepicker__flyout--open": this.state.showFlyout
+      ["daterangepicker__flyout-open daterangepicker__flyout-open-" +
+      this.props.options.open]: this.state.showFlyout
     });
     return (
-      <OutsideClickDetector clickHandler={this.insideOutSideClickHandler}>
-        <div className="daterangepicker">
-          <input type="text" className="daterangepicker__input" />
-          <div className={flyoutClassNames} />
+      <OutsideClickDetector
+        clickHandler={this.insideOutSideClickHandler}
+        className="daterangepicker"
+      >
+        <input type="text" className="daterangepicker__input" />
+        <div className={flyoutClassNames}>
+          <Calendar />
+          <Calendar />
         </div>
       </OutsideClickDetector>
     );
   }
 }
+
+ReactDateRangePicker.propTypes = {
+  options: PropTypes.shape({
+    open: PropTypes.string
+  })
+};
+
+ReactDateRangePicker.defaultProps = {
+  options: {
+    open: "left"
+  }
+};
 
 /* istanbul ignore next */
 if (module.hot) module.hot.accept();

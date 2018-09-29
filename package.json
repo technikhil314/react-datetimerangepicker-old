@@ -27,7 +27,8 @@
     "setupTestFrameworkScriptFile": "<rootDir>/testSetup/enzyme.js",
     "testPathIgnorePatterns": [
       "<rootDir>/testSetup",
-      "<rootDir>/demo"
+      "<rootDir>/demo",
+      "<rootDir>/src/js/lib"
     ],
     "coverageReporters": [
       "lcov",
@@ -42,7 +43,8 @@
       "!**/test/**",
       "!**/webpack.**",
       "!**/testCoverage/**",
-      "!**/testSetup/**"
+      "!**/testSetup/**",
+      "!**/src/js/lib/**"
     ],
     "collectCoverage": true,
     "clearMocks": true,

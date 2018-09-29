@@ -25,3 +25,34 @@ describe("daterangepicker component", () => {
     });
   });
 });
+
+describe("daterangepicker options tester", () => {
+  const shallowRenderWithOptions = options => {
+    return shallow(<ReactDateRangePicker options={options} />);
+  };
+  describe("options.open", () => {
+    it("should not have open classes in html", () => {
+      const wrapper = shallowRenderWithOptions({
+        open: "left"
+      });
+      expect(wrapper.find(".daterangepicker__flyout")).toHaveLength(1);
+      expect(wrapper.find(".daterangepicker__flyout-open-left")).toHaveLength(
+        0
+      );
+    });
+
+    it("should have open classes in html when state.showflyout is true", () => {
+      const wrapper = shallowRenderWithOptions({
+        open: "left"
+      });
+      wrapper.setState({
+        showFlyout: true
+      });
+      wrapper.update();
+      expect(wrapper.find(".daterangepicker__flyout")).toHaveLength(1);
+      expect(wrapper.find(".daterangepicker__flyout-open-left")).toHaveLength(
+        1
+      );
+    });
+  });
+});

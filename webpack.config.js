@@ -14,7 +14,8 @@ module.exports = {
     alias: {
       "@components": path.resolve("src/js/components"),
       "@common": path.resolve("src/js/common"),
-      "@styles": path.resolve("src/scss")
+      "@styles": path.resolve("src/scss"),
+      "@lib": path.resolve("src/lib")
     }
   },
   entry: {

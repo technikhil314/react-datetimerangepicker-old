@@ -40,7 +40,7 @@ export default class InsideOutsideClickDetector extends Component {
   render() {
     return (
       <div
-        className="insideOutsideClickHandler-wrapper"
+        className={this.props.className + " insideOutsideClickHandler-wrapper"}
         onClick={this.handleDocumentClick}
         ref={node => {
           this.node = node;
@@ -53,6 +53,7 @@ export default class InsideOutsideClickDetector extends Component {
 }
 
 InsideOutsideClickDetector.propTypes = {
-  children: PropTypes.object.isRequired,
-  clickHandler: PropTypes.func.isRequired
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  clickHandler: PropTypes.func.isRequired,
+  className: PropTypes.string
 };

@@ -1,4 +1,12 @@
 @import './variables';
-@import './common';
-@import './insideOutsideClickDetector';
-@import './daterangepicker';
+@import './theme';
+
+.daterangepicker {
+    position: relative;
+    width: 100%;
+
+    @import './common';
+    @import './insideOutsideClickDetector';
+    @import './daterangepicker';
+    @import './calendar';
+}
