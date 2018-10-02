@@ -67,7 +67,7 @@ module.exports = {
   ],
   devServer: {
     inline: true,
-    hot: true,
+    hot: false,
     stats: {
       all: false,
       errors: true,

@@ -15,7 +15,7 @@ module.exports = {
       "@components": path.resolve("src/js/components"),
       "@common": path.resolve("src/js/common"),
       "@styles": path.resolve("src/scss"),
-      "@lib": path.resolve("src/lib")
+      "@lib": path.resolve("src/js/lib")
     }
   },
   entry: {

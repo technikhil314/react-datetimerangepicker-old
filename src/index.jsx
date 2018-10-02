@@ -40,8 +40,8 @@ export default class ReactDateRangePicker extends Component {
       >
         <input type="text" className="daterangepicker__input" />
         <div className={flyoutClassNames}>
-          <Calendar />
-          <Calendar />
+          <Calendar date="02/10/2018" format="DD/MM/YYYY" />
+          <Calendar date="02/11/2018" format="DD/MM/YYYY" />
         </div>
       </OutsideClickDetector>
     );

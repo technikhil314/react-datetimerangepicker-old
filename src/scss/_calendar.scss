@@ -1,11 +1,11 @@
 .calendar {
-    width: 50%;
+    width: 40%;
 
     @media screen and (min-width: 769px) {
         float: left;
     }
 
-    padding: 5px 10px;
+    padding: 5px;
     box-sizing: border-box;
 
     tr {
@@ -14,10 +14,15 @@
         th,
         td {
             padding: 3px;
+            text-align: center;
         }
 
         td {
             cursor: pointer;
+        }
+
+        th {
+            font-size: 14px;
         }
     }
 }
