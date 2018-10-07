@@ -1,4 +1,4 @@
-let Moment = require("moment");
+const moment = require("moment");
 const MomentRange = require("moment-range");
 
-export default MomentRange.extendMoment(Moment);
+export default MomentRange.extendMoment(moment);

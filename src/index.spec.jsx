@@ -1,7 +1,6 @@
 import ReactDateRangePicker from ".";
 import { shallow } from "enzyme";
 import React from "react";
-
 describe("daterangepicker component", () => {
   it("should render properly", () => {
     const wrapper = shallow(<ReactDateRangePicker />);
@@ -19,7 +18,15 @@ describe("daterangepicker component", () => {
       expect(wrapper.state("showFlyout")).toEqual(true);
     });
 
-    it("should set the value to false when inside click is true", () => {
+    it("should set the value to false when showFlyout is false", () => {
+      wrapper.setState({
+        showFlyout: true
+      });
+      wrapper.instance().insideOutSideClickHandler(false);
+      expect(wrapper.state("showFlyout")).toEqual(false);
+    });
+
+    it("should set the value to false when inside click is false", () => {
       wrapper.instance().insideOutSideClickHandler(false);
       expect(wrapper.state("showFlyout")).toEqual(false);
     });

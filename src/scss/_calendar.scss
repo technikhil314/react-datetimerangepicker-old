@@ -1,8 +1,12 @@
 .calendar {
-    width: 40%;
+    width: 50%;
 
     @media screen and (min-width: 769px) {
         float: left;
+    }
+
+    table {
+        width: 100%;
     }
 
     padding: 5px;
@@ -22,7 +26,7 @@
         }
 
         th {
-            font-size: 14px;
+            font-size: var(--daterangepicker-font-size);
         }
     }
 }

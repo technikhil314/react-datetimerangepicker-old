@@ -1,0 +1,41 @@
+.calendarHeader {
+  text-align: center;
+  margin-bottom: 5px;
+
+  &__prev-buttons,
+  &__next-buttons {
+    display: inline-block;
+    width: 30%;
+  }
+
+  &__title {
+    display: inline-block;
+    width: 40%;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &__control {
+    width: 30%;
+    text-align: left;
+    margin: 0 10%;
+    padding: 4px 3px;
+    display: inline-block;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    svg {
+      height: 16px;
+      width: 16px;
+      fill: var(--daterangepicker-icon-color);
+    }
+  }
+
+  &__next-year,
+  &__next-month {
+    transform: rotateY(180deg);
+  }
+}

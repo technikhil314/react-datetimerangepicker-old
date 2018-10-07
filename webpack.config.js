@@ -1,6 +1,7 @@
 const copyWebpackPlugin = require("copy-webpack-plugin");
 const extractTextPlugin = require("extract-text-webpack-plugin");
 const path = require("path");
+const webpack = require("webpack");
 const isDevServer = process.argv[2].indexOf("--watch") !== -1;
 let extractTextPluginInstance = new extractTextPlugin({
   filename: "styles.css",
@@ -54,6 +55,14 @@ module.exports = {
           fallback: "style-loader",
           use: ["css-loader", "sass-loader"]
         })
+      },
+      {
+        test: /\.(svg)$/i,
+        use: [
+          {
+            loader: "raw-loader"
+          }
+        ]
       }
     ]
   },
@@ -70,7 +79,8 @@ module.exports = {
         toType: "file"
       }
     ]),
-    extractTextPluginInstance
+    extractTextPluginInstance,
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   externals: {
     react: "commonjs react",

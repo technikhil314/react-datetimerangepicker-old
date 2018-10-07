@@ -1,25 +1,57 @@
 import { PropTypes } from "prop-types";
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import OutsideClickDetector from "@common/insideOutsideClickDetector";
 import { classNames } from "@common/utils";
 import Calendar from "@components/calendar";
 import "@styles/styles.scss";
+import { themes } from "@common/constants/theme";
+import cssVars from "css-vars-ponyfill";
+import { defaultOptions } from "./js/common/constants/constants";
 
-export default class ReactDateRangePicker extends Component {
+/* istanbul ignore next */
+if (process.env.NODE_ENV !== "production") {
+  const { whyDidYouUpdate } = require("why-did-you-update");
+  whyDidYouUpdate(React);
+}
+
+export default class ReactDateRangePicker extends PureComponent {
   constructor(props) {
     super(props);
     this.insideOutSideClickHandler = ::this.insideOutSideClickHandler;
+    this.state = {
+      showFlyout: false,
+      ...props,
+      options: {
+        ...defaultOptions,
+        ...props.options
+      }
+    };
   }
-  componentWillMount() {
-    this.setDefaultFlyoutClassName();
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const nextState = {
+      ...prevState,
+      ...nextProps,
+      options: {
+        ...defaultOptions,
+        ...nextProps.options
+      }
+    };
+    cssVars({
+      variables: {
+        ...themes[nextState.options.theme]
+      }
+    });
+    return nextState;
   }
   insideOutSideClickHandler(isInsideClick) {
-    if (isInsideClick) {
-      this.setState({
-        showFlyout: isInsideClick
-      });
-    } else {
-      this.setDefaultFlyoutClassName();
+    if (this.state.showFlyout || isInsideClick) {
+      if (isInsideClick) {
+        this.setState({
+          showFlyout: isInsideClick
+        });
+      } else {
+        this.setDefaultFlyoutClassName();
+      }
     }
   }
   setDefaultFlyoutClassName() {
@@ -31,7 +63,7 @@ export default class ReactDateRangePicker extends Component {
     let flyoutClassNames = classNames({
       daterangepicker__flyout: true,
       ["daterangepicker__flyout-open daterangepicker__flyout-open-" +
-      this.props.options.open]: this.state.showFlyout
+      this.state.options.open]: this.state.showFlyout
     });
     return (
       <OutsideClickDetector
@@ -50,14 +82,13 @@ export default class ReactDateRangePicker extends Component {
 
 ReactDateRangePicker.propTypes = {
   options: PropTypes.shape({
-    open: PropTypes.string
+    open: PropTypes.string,
+    theme: PropTypes.string
   })
 };
 
 ReactDateRangePicker.defaultProps = {
-  options: {
-    open: "left"
-  }
+  options: defaultOptions
 };
 
 /* istanbul ignore next */

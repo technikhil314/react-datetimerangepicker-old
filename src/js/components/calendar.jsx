@@ -1,16 +1,22 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
 import moment from "@lib/extendedMoment";
-export default class CalendarComponent extends Component {
+import CalendarHeader from "@components/calendarHeader";
+export default class CalendarComponent extends PureComponent {
   constructor(props) {
     super(props);
+
+    this.onMonthChange = ::this.onMonthChange;
+    this.onYearChange = ::this.onYearChange;
+    let { date, format } = props;
+    date = date || moment().format("DD/MM/YYYY");
+    date = moment(date, format);
     this.state = {
-      calendarData: CalendarComponent.createCalendarGridData(
-        props.date,
-        props.format
-      )
+      ...CalendarComponent.getStateValuesFromMomentDate(date)
     };
   }
+
+  //Logic to generate calendar data for display
   static getWeekNumbers(monthRange) {
     let weekNumbers = [];
     let indexOf = [].indexOf;
@@ -54,10 +60,8 @@ export default class CalendarComponent extends Component {
     }
     return weeksRange;
   }
-  static createCalendarGridData(date, format) {
-    date = date || moment().format("DD/MM/YYYY");
-    let year = moment(date, format).format("YYYY");
-    let month = parseInt(moment(date, format).format("MM"), 10) - 1;
+  createCalendarGridData() {
+    let { month, year } = this.state;
     let startDate = moment([year, month]);
     let firstDay = moment(startDate).startOf("month");
     let endDay = moment(startDate).add(60, "d");
@@ -79,29 +83,69 @@ export default class CalendarComponent extends Component {
     });
     return weekList;
   }
+
+  //React component life cycle events
   static getDerivedStateFromProps(nextProps, prevState) {
+    let { date, format } = nextProps;
+    const momentDate = moment(date, format);
     return {
-      ...nextProps,
-      ...prevState,
-      calendarData: CalendarComponent.createCalendarGridData(
-        nextProps.date,
-        nextProps.format
-      )
+      ...CalendarComponent.getStateValuesFromMomentDate(momentDate),
+      ...prevState
     };
   }
+
+  //Inter component communication
+  onMonthChange(value) {
+    const { month, year } = this.state;
+    const momentDate = moment([year, month]);
+    this.setState({
+      ...CalendarComponent.getStateValuesFromMomentDate(
+        momentDate.add(value, "M")
+      )
+    });
+  }
+
+  onYearChange(value) {
+    const { month, year } = this.state;
+    const momentDate = moment([year, month]);
+    this.setState({
+      ...CalendarComponent.getStateValuesFromMomentDate(
+        momentDate.add(value, "year")
+      )
+    });
+  }
+
+  //Private component logic
+  static getStateValuesFromMomentDate(momentDate) {
+    let demo = {
+      monthName: momentDate.format("MMM"),
+      month: parseInt(momentDate.format("MM"), 10) - 1,
+      year: parseInt(momentDate.format("YYYY"), 10)
+    };
+    return demo;
+  }
+
+  //Rendering logic
   getWeekBody(week) {
     return week.map(day => {
       return <td key={day.format("DD/MM")}>{day.format("DD")}</td>;
     });
   }
   getCalendarBody() {
-    return this.state.calendarData.map((week, index) => {
+    return this.createCalendarGridData().map((week, index) => {
       return <tr key={index}>{this.getWeekBody(week)}</tr>;
     });
   }
   render() {
+    const { monthName, year } = this.state;
+    const displayMonthName = `${monthName} ${year}`;
     return (
       <div className="calendar">
+        <CalendarHeader
+          name={displayMonthName}
+          onMonthChange={this.onMonthChange}
+          onYearChange={this.onYearChange}
+        />
         <table>
           <thead>
             <tr>

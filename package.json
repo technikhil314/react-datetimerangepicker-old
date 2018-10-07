@@ -28,7 +28,8 @@
     "testPathIgnorePatterns": [
       "<rootDir>/testSetup",
       "<rootDir>/demo",
-      "<rootDir>/src/js/lib"
+      "<rootDir>/src/js/lib",
+      "<rootDir>/src/common/constants"
     ],
     "coverageReporters": [
       "lcov",
@@ -44,13 +45,14 @@
       "!**/webpack.**",
       "!**/testCoverage/**",
       "!**/testSetup/**",
-      "!**/src/js/lib/**"
+      "!**/src/js/lib/**",
+      "!**/src/common/constants/**"
     ],
     "collectCoverage": true,
     "clearMocks": true,
     "coverageDirectory": "testCoverage",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/testSetup/__mocks__/fileMock.js",
       "\\.(css|less|scss)$": "identity-obj-proxy",
       "@components/(.*)$": "<rootDir>/src/js/components/$1",
       "@common/(.*)$": "<rootDir>/src/js/common/$1",
@@ -134,16 +136,19 @@
     "node-sass": "^4.9.3",
     "prettier": "^1.14.2",
     "prop-types": "^15.6.2",
+    "raw-loader": "^0.5.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "sass-lint": "^1.12.1",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.8",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "why-did-you-update": "^0.1.1"
   },
   "dependencies": {
+    "css-vars-ponyfill": "^1.11.1",
     "moment": "^2.22.2",
     "moment-range": "^4.0.1"
   },
