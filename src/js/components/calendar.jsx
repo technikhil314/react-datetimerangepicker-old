@@ -168,6 +168,10 @@ export default class CalendarComponent extends PureComponent {
   render() {
     const { monthName, year } = this.state;
     const displayMonthName = `${monthName} ${year}`;
+    let displayDate = "";
+    if (this.props.date && this.props.date.format) {
+      displayDate = this.props.date.format(this.props.format);
+    }
     return (
       <div className="calendar">
         <CalendarHeader
@@ -177,12 +181,8 @@ export default class CalendarComponent extends PureComponent {
         />
         <input
           className="calendar__input"
-          defaultValue={
-            (this.props.date &&
-              this.props.date.format &&
-              this.props.date.format(this.props.format)) ||
-            ""
-          }
+          onChange={() => {}}
+          value={displayDate}
         />
         <table>
           <thead>

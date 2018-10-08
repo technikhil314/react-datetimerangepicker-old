@@ -8,7 +8,10 @@ export default class DemoApp extends Component {
       daterangepickerOptions: {
         open: "left",
         theme: "light",
-        format: "DD/MM/YYYY"
+        format: "DD/MM/YYYY",
+        startDate: "07/10/2018",
+        endDate: "07/10/2019",
+        onRangeSelected: () => {}
       }
     };
   }

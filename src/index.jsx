@@ -30,14 +30,22 @@ export default class ReactDateRangePicker extends PureComponent {
     this.state = {
       showFlyout: false,
       fromDate: props.options.startDate
-        ? moment(props.options.startDate)
+        ? moment(props.options.startDate, props.options.format)
         : null,
-      toDate: props.options.endDate ? moment(props.options.endDate) : null,
+      toDate: props.options.endDate
+        ? moment(props.options.endDate, props.options.format)
+        : null,
       options: {
         ...defaultOptions,
         ...props.options
       }
     };
+  }
+  componentDidMount() {
+    const { fromDate, toDate } = this.state;
+    if (fromDate && toDate) {
+      this.applyRange();
+    }
   }
   static getDerivedStateFromProps(nextProps, prevState) {
     const nextState = {
@@ -209,6 +217,7 @@ export default class ReactDateRangePicker extends PureComponent {
             <button
               className="daterangepicker__control daterangepicker__control--apply"
               onClick={this.applyRange}
+              disabled={!(fromDate && toDate)}
             >
               Apply
             </button>
@@ -222,6 +231,7 @@ export default class ReactDateRangePicker extends PureComponent {
             <button
               className="daterangepicker__control daterangepicker__control--clear"
               onClick={this.clear}
+              disabled={!(fromDate && toDate)}
             >
               Clear
             </button>
@@ -238,7 +248,8 @@ ReactDateRangePicker.propTypes = {
     theme: PropTypes.string,
     startDate: PropTypes.any,
     endDate: PropTypes.any,
-    onRangeSelected: PropTypes.func
+    onRangeSelected: PropTypes.func,
+    format: PropTypes.string
   })
 };
 
