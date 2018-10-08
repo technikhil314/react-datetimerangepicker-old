@@ -1,7 +1,8 @@
 .calendar {
-    width: 50%;
+    width: 100%;
 
     @media screen and (min-width: 769px) {
+        width: 50%;
         float: left;
     }
 
@@ -28,5 +29,38 @@
         th {
             font-size: var(--daterangepicker-font-size);
         }
+    }
+
+    &__date--selected {
+        background-color: var(--daterangepicker-date-selected);
+    }
+
+    &__date--inSelectedRange {
+        background-color: var(--daterangepicker-date-inSelectedRange);
+    }
+
+    &__date--off {
+        opacity: 0.6;
+    }
+
+    &__input {
+        width: 90%;
+        margin: 10px 5%;
+        box-sizing: border-box;
+        display: block;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: var(--daterangepicker-font-size);
+        line-height: 1.42857143;
+        color: var(--daterangepicker-input-foreground);
+        background-color: var(--daterangepicker-input-background);
+        background-image: none;
+        border: 1px solid var(--daterangepicker-input-border-color);
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px var(--daterangepicker-input-box-shadow-color);
+        box-shadow: inset 0 1px 1px var(--daterangepicker-input-box-shadow-color);
+        -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
 }

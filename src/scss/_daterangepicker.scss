@@ -30,6 +30,7 @@
     border-color: var(--daterangepicker-flyout-border-color);
     color: var(--daterangepicker-flyout-foreground);
     font-size: var(--daterangepicker-font-size);
+    z-index: 2;
 
     @media screen and (max-width: 768px) {
         min-width: $flyout-tablet-width;
@@ -76,4 +77,41 @@
             left: initial;
         }
     }
+}
+
+&__input-wrapper {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+&__control {
+    margin: 0 5px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+    padding: 4px 8px;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+&__control--clear {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--daterangepicker-clear-button-foreground);
+}
+
+&__control--apply {
+    background: var(--daterangepicker-apply-button-background);
+    color: var(--daterangepicker-apply-button-foreground);
+    border: 1px solid var(--daterangepicker-apply-button-background);
+}
+
+&__control--cancel {
+    background: var(--daterangepicker-cancel-button-background);
+    color: var(--daterangepicker-cancel-button-foreground);
+    border: 1px solid var(--daterangepicker-cancel-button-background);
 }

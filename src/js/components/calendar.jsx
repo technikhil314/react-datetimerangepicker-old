@@ -2,12 +2,14 @@ import React, { PureComponent } from "react";
 import { PropTypes } from "prop-types";
 import moment from "@lib/extendedMoment";
 import CalendarHeader from "@components/calendarHeader";
+import { classNames } from "@common/utils";
 export default class CalendarComponent extends PureComponent {
   constructor(props) {
     super(props);
 
     this.onMonthChange = ::this.onMonthChange;
     this.onYearChange = ::this.onYearChange;
+    this.onDateSelected = ::this.onDateSelected;
     let { date, format } = props;
     date = date || moment().format("DD/MM/YYYY");
     date = moment(date, format);
@@ -94,7 +96,7 @@ export default class CalendarComponent extends PureComponent {
     };
   }
 
-  //Inter component communication
+  //Action/Events handlers and Callbacks
   onMonthChange(value) {
     const { month, year } = this.state;
     const momentDate = moment([year, month]);
@@ -115,20 +117,47 @@ export default class CalendarComponent extends PureComponent {
     });
   }
 
+  onDateSelected(day) {
+    return () => {
+      this.props.onDateSelected(day);
+      this.setState({
+        ...CalendarComponent.getStateValuesFromMomentDate(day)
+      });
+    };
+  }
+
   //Private component logic
   static getStateValuesFromMomentDate(momentDate) {
-    let demo = {
-      monthName: momentDate.format("MMM"),
-      month: parseInt(momentDate.format("MM"), 10) - 1,
-      year: parseInt(momentDate.format("YYYY"), 10)
-    };
-    return demo;
+    return momentDate.isValid()
+      ? {
+          monthName: momentDate.format("MMM"),
+          month: parseInt(momentDate.format("MM"), 10) - 1,
+          year: parseInt(momentDate.format("YYYY"), 10)
+        }
+      : {};
   }
 
   //Rendering logic
   getWeekBody(week) {
     return week.map(day => {
-      return <td key={day.format("DD/MM")}>{day.format("DD")}</td>;
+      const selectedDateClassNames = classNames({
+        "calendar__date--selected":
+          moment(this.props.fromDate, this.props.format).isSame(day, "date") ||
+          moment(this.props.toDate, this.props.format).isSame(day, "date"),
+        "calendar__date--inSelectedRange":
+          day.isAfter(this.props.fromDate) && day.isBefore(this.props.toDate),
+        "calendar__date--off":
+          parseInt(day.format("MM"), 10) - 1 !== this.state.month
+      });
+      return (
+        <td
+          className={selectedDateClassNames}
+          onClick={this.onDateSelected(day)}
+          key={day.format("DD/MM")}
+        >
+          {day.format("DD")}
+        </td>
+      );
     });
   }
   getCalendarBody() {
@@ -145,6 +174,15 @@ export default class CalendarComponent extends PureComponent {
           name={displayMonthName}
           onMonthChange={this.onMonthChange}
           onYearChange={this.onYearChange}
+        />
+        <input
+          className="calendar__input"
+          defaultValue={
+            (this.props.date &&
+              this.props.date.format &&
+              this.props.date.format(this.props.format)) ||
+            ""
+          }
         />
         <table>
           <thead>
@@ -166,8 +204,11 @@ export default class CalendarComponent extends PureComponent {
 }
 
 CalendarComponent.propTypes = {
-  date: PropTypes.string,
-  format: PropTypes.string
+  date: PropTypes.any,
+  fromDate: PropTypes.object,
+  toDate: PropTypes.object,
+  format: PropTypes.string,
+  onDateSelected: PropTypes.func
 };
 
 CalendarComponent.defaultProps = {

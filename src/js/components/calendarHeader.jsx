@@ -26,11 +26,13 @@ export default class CalendarHeader extends PureComponent {
             dangerouslySetInnerHTML={{ __html: yearArrow }}
             className="calendarHeader__control calendarHeader__control-year calendarHeader__prev-year"
             onClick={this.onYearChange(-1)}
+            title="Previous Year"
           />
           <span
             dangerouslySetInnerHTML={{ __html: monthArrow }}
             className="calendarHeader__control calendarHeader__control-month calendarHeader__prev-month"
             onClick={this.onMonthChange(-1)}
+            title="Previous Month"
           />
         </span>
         <span className="calendarHeader__title">{this.props.name}</span>
@@ -39,11 +41,13 @@ export default class CalendarHeader extends PureComponent {
             dangerouslySetInnerHTML={{ __html: monthArrow }}
             className="calendarHeader__control calendarHeader__control-month calendarHeader__next-month"
             onClick={this.onMonthChange(1)}
+            title="Next Month"
           />
           <span
             dangerouslySetInnerHTML={{ __html: yearArrow }}
             className="calendarHeader__control calendarHeader__control-year calendarHeader__next-year"
             onClick={this.onYearChange(1)}
+            title="Next Year"
           />
         </span>
       </div>

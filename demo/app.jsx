@@ -6,7 +6,9 @@ export default class DemoApp extends Component {
     super(props);
     this.state = {
       daterangepickerOptions: {
-        open: "left"
+        open: "left",
+        theme: "light",
+        format: "DD/MM/YYYY"
       }
     };
   }

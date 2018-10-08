@@ -4,6 +4,12 @@
     position: relative;
     width: 100%;
 
+    &::after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+
     @import './insideOutsideClickDetector';
     @import './daterangepicker';
     @import './calendar';
