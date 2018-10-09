@@ -31,12 +31,12 @@
         }
     }
 
-    &__date--selected {
-        background-color: var(--daterangepicker-date-selected);
-    }
-
     &__date--inSelectedRange {
         background-color: var(--daterangepicker-date-inSelectedRange);
+    }
+
+    &__date--selected {
+        background-color: var(--daterangepicker-date-selected);
     }
 
     &__date--off {

@@ -27,18 +27,17 @@ export default class ReactDateRangePicker extends PureComponent {
     this.clear = ::this.clear;
     this.restoreOldDates = ::this.restoreOldDates;
     this.clearBackedupOldDates = ::this.clearBackedupOldDates;
+    const options = {
+      ...defaultOptions,
+      ...props.options
+    };
     this.state = {
       showFlyout: false,
-      fromDate: props.options.startDate
-        ? moment(props.options.startDate, props.options.format)
+      fromDate: options.startDate
+        ? moment(options.startDate, options.format)
         : null,
-      toDate: props.options.endDate
-        ? moment(props.options.endDate, props.options.format)
-        : null,
-      options: {
-        ...defaultOptions,
-        ...props.options
-      }
+      toDate: options.endDate ? moment(options.endDate, options.format) : null,
+      options
     };
   }
   componentDidMount() {
@@ -161,6 +160,7 @@ export default class ReactDateRangePicker extends PureComponent {
       fromDate: undefined,
       toDate: undefined
     });
+    this.clearBackedupOldDates();
   }
 
   clearSelectedRange() {
@@ -213,7 +213,7 @@ export default class ReactDateRangePicker extends PureComponent {
             toDate={toDate}
             onDateSelected={this.setToDate}
           />
-          <div className="daterangepicker__input-wrapper">
+          <div className="daterangepicker__controls-wrapper">
             <button
               className="daterangepicker__control daterangepicker__control--apply"
               onClick={this.applyRange}
@@ -248,7 +248,7 @@ ReactDateRangePicker.propTypes = {
     theme: PropTypes.string,
     startDate: PropTypes.any,
     endDate: PropTypes.any,
-    onRangeSelected: PropTypes.func,
+    onRangeSelected: PropTypes.func.isRequired,
     format: PropTypes.string
   })
 };

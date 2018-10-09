@@ -1,7 +1,9 @@
 export const defaultOptions = {
   open: "left",
   theme: "light",
-  format: "DD.MM.YYYY"
+  format: "DD.MM.YYYY",
+  startDate: "",
+  endDate: ""
 };
 
 export const colors = {
@@ -10,8 +12,8 @@ export const colors = {
   "LIGHT-GREY": "#AAAAAA",
   "MID-GREY": "#888888",
   "DARK-GREY": "#555555",
-  "DARKEST-GREY": "#222222",
-  BLACK: "#000000",
+  "DARKEST-GREY": "#333333",
+  BLACK: "#1A1A1A",
   SUCCESS: "#379457",
   "OFF-WHITE": "#d1dbe1",
   "OFF-BLACK": "#333333"
