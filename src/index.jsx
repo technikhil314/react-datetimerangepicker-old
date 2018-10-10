@@ -37,6 +37,7 @@ export default class ReactDateRangePicker extends PureComponent {
         ? moment(options.startDate, options.format)
         : null,
       toDate: options.endDate ? moment(options.endDate, options.format) : null,
+      selectedRange: "",
       options
     };
   }

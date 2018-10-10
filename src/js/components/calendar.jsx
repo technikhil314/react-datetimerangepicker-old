@@ -205,8 +205,8 @@ export default class CalendarComponent extends PureComponent {
 
 CalendarComponent.propTypes = {
   date: PropTypes.any,
-  fromDate: PropTypes.object,
-  toDate: PropTypes.object,
+  fromDate: PropTypes.any,
+  toDate: PropTypes.any,
   format: PropTypes.string,
   onDateSelected: PropTypes.func
 };
