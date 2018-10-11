@@ -165,6 +165,8 @@ export default class CalendarComponent extends PureComponent {
       return <tr key={index}>{this.getWeekBody(week)}</tr>;
     });
   }
+  /* istanbul ignore next */
+  noop() {}
   render() {
     const { monthName, year } = this.state;
     const displayMonthName = `${monthName} ${year}`;
@@ -181,7 +183,7 @@ export default class CalendarComponent extends PureComponent {
         />
         <input
           className="calendar__input"
-          onChange={() => {}}
+          onChange={this.noop}
           value={displayDate}
         />
         <table>

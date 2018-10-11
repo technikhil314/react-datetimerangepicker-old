@@ -81,25 +81,28 @@ export default class ReactDateRangePicker extends PureComponent {
           this.backupOldDates();
         }
       } else {
-        this.setDefaultFlyoutClassName();
+        this.setStateDefaults();
         this.clearBackedupOldDates();
       }
     }
   }
 
   setFromDate(date) {
+    let nextState;
     if (date.isAfter(this.state.toDate, "date")) {
-      this.setState({
+      nextState = {
         fromDate: date.startOf("day"),
-        toDate: date.endOf("day"),
-        rangeIsDirty: true
-      });
+        toDate: date.endOf("day")
+      };
     } else {
-      this.setState({
-        fromDate: date.startOf("day"),
-        rangeIsDirty: true
-      });
+      nextState = {
+        fromDate: date.startOf("day")
+      };
     }
+    this.setState({
+      ...nextState,
+      rangeIsDirty: true
+    });
   }
 
   setToDate(date) {
@@ -127,10 +130,12 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   restoreOldDates() {
-    this.setState({
-      fromDate: this.oldFromDate,
-      toDate: this.oldToDate
-    });
+    if (this.oldDatesStored) {
+      this.setState({
+        fromDate: this.oldFromDate,
+        toDate: this.oldToDate
+      });
+    }
   }
 
   clearBackedupOldDates() {
@@ -146,7 +151,7 @@ export default class ReactDateRangePicker extends PureComponent {
       toDate,
       `${fromDate.format(format)} - ${toDate.format(format)}`
     );
-    this.setDefaultFlyoutClassName();
+    this.setStateDefaults();
     this.clearBackedupOldDates();
   }
 
@@ -155,7 +160,7 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   clear() {
-    this.setDefaultFlyoutClassName();
+    this.setStateDefaults();
     this.onRangeSelected();
     this.clearBackedupOldDates();
   }
@@ -165,7 +170,7 @@ export default class ReactDateRangePicker extends PureComponent {
     toDate = undefined,
     selectedRange = ""
   ) {
-    this.setState({ selectedRange });
+    this.setState({ fromDate, toDate, selectedRange });
     this.props.onRangeSelected({
       fromDate,
       toDate
@@ -173,7 +178,7 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   //Component private methods
-  setDefaultFlyoutClassName() {
+  setStateDefaults() {
     this.setState({
       showFlyout: false,
       rangeIsDirty: false

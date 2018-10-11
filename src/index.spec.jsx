@@ -279,7 +279,7 @@ describe("should not set range if startDate or endDate is not passed as props", 
   });
 });
 
-describe("setDefaultFlyoutClassName method", () => {
+describe("setStateDefaults method", () => {
   let wrapper,
     onRangeSelectedMock = jest.fn(),
     options = {};
@@ -288,15 +288,288 @@ describe("setDefaultFlyoutClassName method", () => {
     wrapper = shallow(<ReactDateRangePicker {...options} />);
   });
 
-  it("setDefaultFlyoutClassName should set the state of component properly", () => {
+  it("setStateDefaults should set the state of component properly", () => {
     wrapper.setState({
       showFlyout: true,
       rangeIsDirty: true
     });
     expect(wrapper.state("showFlyout")).toBe(true);
     expect(wrapper.state("rangeIsDirty")).toBe(true);
-    wrapper.instance().setDefaultFlyoutClassName();
+    wrapper.instance().setStateDefaults();
     expect(wrapper.state("showFlyout")).toBe(false);
     expect(wrapper.state("rangeIsDirty")).toBe(false);
+  });
+});
+
+describe("onRangeSelected method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("onRangeSelected should set the state of component properly", () => {
+    wrapper
+      .instance()
+      .onRangeSelected("dummyFromDate", "dummyToDate", "dummyRange");
+    expect(wrapper.state("selectedRange")).toBe("dummyRange");
+    expect(onRangeSelectedMock).toHaveBeenCalledWith({
+      fromDate: "dummyFromDate",
+      toDate: "dummyToDate"
+    });
+  });
+
+  it("when no arguments are passed", () => {
+    wrapper.setState({
+      selectedRange: "dummyRange"
+    });
+    wrapper.instance().onRangeSelected();
+    expect(wrapper.state("selectedRange")).toBe("");
+    expect(onRangeSelectedMock).toHaveBeenCalledWith({
+      fromDate: undefined,
+      toDate: undefined
+    });
+  });
+});
+
+describe("setFromDate method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("setFromDate should set the state of component properly", () => {
+    let dummyDate = moment("11/12/2018", "DD/MM/YYYY");
+    wrapper.instance().setFromDate(dummyDate);
+    expect(wrapper.state("fromDate").isSame(dummyDate.startOf("day"))).toBe(
+      true
+    );
+    expect(wrapper.state("rangeIsDirty")).toBe(true);
+  });
+
+  it("if selected from date is after to date", () => {
+    let dummyDate = moment("11/12/2017", "DD/MM/YYYY");
+    wrapper.setState({
+      toDate: dummyDate
+    });
+    expect(wrapper.state("toDate")).toBe(dummyDate);
+    dummyDate = moment("11/12/2018", "DD/MM/YYYY");
+    wrapper.instance().setFromDate(dummyDate);
+    expect(wrapper.state("fromDate").isSame(dummyDate.startOf("day"))).toBe(
+      true
+    );
+    expect(wrapper.state("toDate").isSame(dummyDate.endOf("day"))).toBe(true);
+    expect(wrapper.state("rangeIsDirty")).toBe(true);
+  });
+});
+
+describe("setToDate method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("setToDate should set the state of component properly", () => {
+    let dummyDate = moment("11/12/2018", "DD/MM/YYYY");
+    wrapper.instance().setToDate(dummyDate);
+    expect(
+      wrapper
+        .state("toDate")
+        .isSame(moment("11/12/2018", "DD/MM/YYYY").endOf("day"))
+    ).toBe(true);
+    expect(wrapper.state("rangeIsDirty")).toBe(true);
+  });
+
+  it("if selected to date is before from date", () => {
+    let dummyDate = moment("11/12/2018", "DD/MM/YYYY");
+    wrapper.setState({
+      fromDate: dummyDate
+    });
+    expect(wrapper.state("fromDate")).toBe(dummyDate);
+    dummyDate = moment("11/12/2017", "DD/MM/YYYY");
+    wrapper.instance().setToDate(dummyDate);
+    expect(wrapper.state("fromDate").isSame(dummyDate.startOf("day"))).toBe(
+      true
+    );
+    expect(wrapper.state("toDate").isSame(dummyDate.endOf("day"))).toBe(true);
+    expect(wrapper.state("rangeIsDirty")).toBe(true);
+  });
+});
+
+describe("backupOldDates method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("should take backup of old dates properly", () => {
+    wrapper.setState({
+      fromDate: "dummyfromdate",
+      toDate: "dummytodate"
+    });
+    wrapper.instance().backupOldDates();
+    expect(wrapper.instance().oldFromDate).toBe("dummyfromdate");
+    expect(wrapper.instance().oldToDate).toBe("dummytodate");
+  });
+});
+
+describe("restoreOldDates method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("if back up is taken", () => {
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().oldDatesStored = true;
+    wrapper.instance().restoreOldDates();
+    expect(wrapper.state("fromDate")).toBe("dummyoldfromdate");
+    expect(wrapper.state("toDate")).toBe("dummyoldtodate");
+  });
+
+  it("if backup is not taken", () => {
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().restoreOldDates();
+    expect(wrapper.state("fromDate")).toBe(null);
+    expect(wrapper.state("toDate")).toBe(null);
+  });
+});
+
+describe("clearBackedupOldDates method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("should clear properly", () => {
+    wrapper.setState({
+      fromDate: "dummyFromDate",
+      toDate: "dummyToDate"
+    });
+    wrapper.instance().backupOldDates();
+    wrapper.instance().clearBackedupOldDates();
+    expect(wrapper.instance().oldFromDate).toBe(undefined);
+    expect(wrapper.instance().oldToDate).toBe(undefined);
+    expect(wrapper.instance().oldDatesStored).toBe(false);
+  });
+});
+
+describe("applyRange method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    options.format = "DD/MM/YYYY";
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("should call the callback and set state properly", () => {
+    let mockDate = moment();
+    wrapper.setState({
+      fromDate: mockDate,
+      toDate: mockDate,
+      showFlyout: true,
+      isRangeDirty: true
+    });
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().oldDatesStored = true;
+    wrapper.instance().applyRange();
+    expect(wrapper.instance().oldFromDate).toBe(undefined);
+    expect(wrapper.instance().oldToDate).toBe(undefined);
+    expect(wrapper.instance().oldDatesStored).toBe(false);
+    expect(wrapper.state("selectedRange")).toBe(
+      `${mockDate.format("DD/MM/YYYY")} - ${mockDate.format("DD/MM/YYYY")}`
+    );
+    expect(wrapper.state("showFlyout")).toBe(false);
+    expect(wrapper.state("rangeIsDirty")).toBe(false);
+    expect(onRangeSelectedMock).toHaveBeenCalledWith({
+      fromDate: mockDate,
+      toDate: mockDate
+    });
+  });
+});
+
+describe("cancel method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("if back up is taken", () => {
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().oldDatesStored = true;
+    wrapper.instance().cancel();
+    expect(wrapper.state("fromDate")).toBe("dummyoldfromdate");
+    expect(wrapper.state("toDate")).toBe("dummyoldtodate");
+  });
+
+  it("if backup is not taken", () => {
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().cancel();
+    expect(wrapper.state("fromDate")).toBe(null);
+    expect(wrapper.state("toDate")).toBe(null);
+  });
+});
+describe("clear method", () => {
+  let wrapper,
+    onRangeSelectedMock = jest.fn(),
+    options = {};
+  beforeEach(() => {
+    options.onRangeSelected = onRangeSelectedMock;
+    options.format = "DD/MM/YYYY";
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
+  });
+
+  it("should call the callback and set state properly", () => {
+    let mockDate = moment();
+    wrapper.setState({
+      fromDate: mockDate,
+      toDate: mockDate,
+      showFlyout: true,
+      isRangeDirty: true,
+      selectedRange: "demo"
+    });
+    wrapper.instance().oldFromDate = "dummyoldfromdate";
+    wrapper.instance().oldToDate = "dummyoldtodate";
+    wrapper.instance().oldDatesStored = true;
+    wrapper.instance().clear();
+    expect(wrapper.instance().oldFromDate).toBe(undefined);
+    expect(wrapper.instance().oldToDate).toBe(undefined);
+    expect(wrapper.instance().oldDatesStored).toBe(false);
+    expect(wrapper.state("selectedRange")).toBe("");
+    expect(wrapper.state("fromDate")).toBe(undefined);
+    expect(wrapper.state("toDate")).toBe(undefined);
+    expect(wrapper.state("showFlyout")).toBe(false);
+    expect(wrapper.state("rangeIsDirty")).toBe(false);
+    expect(onRangeSelectedMock).toHaveBeenCalledWith({
+      fromDate: undefined,
+      toDate: undefined
+    });
   });
 });

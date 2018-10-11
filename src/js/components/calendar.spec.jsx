@@ -86,3 +86,27 @@ describe("Call backs should set state properly", () => {
     expect(wrapper.state("year")).toBe(1996);
   });
 });
+
+describe("onDateSelected method", () => {
+  let wrapper,
+    onDateSelectedMock = jest.fn();
+  const getWrapper = (date, format) => {
+    return shallow(
+      <Calendar
+        onDateSelected={onDateSelectedMock}
+        date={date}
+        format={format}
+      />
+    );
+  };
+
+  it("should set the state properly and call callback", () => {
+    const selectedDate = moment("12/01/2018", "DD/MM/YYYY");
+    wrapper = getWrapper(moment("11/12/2016", "DD/MM/YYYY"), "DD/MM/YYYY");
+    wrapper.instance().onDateSelected(selectedDate)();
+    expect(wrapper.state("monthName")).toBe("Jan");
+    expect(wrapper.state("month")).toBe(0);
+    expect(wrapper.state("year")).toBe(2018);
+    expect(onDateSelectedMock).toBeCalledWith(selectedDate);
+  });
+});
