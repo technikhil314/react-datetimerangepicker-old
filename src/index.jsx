@@ -6,7 +6,7 @@ import Calendar from "@components/calendar";
 import "@styles/styles.scss";
 import { themes } from "@common/constants/theme";
 import cssVars from "css-vars-ponyfill";
-import { defaultOptions } from "./js/common/constants/constants";
+import { defaultProps } from "./js/common/constants/constants";
 import moment from "moment";
 /* istanbul ignore next */
 if (process.env.NODE_ENV !== "production") {
@@ -28,8 +28,8 @@ export default class ReactDateRangePicker extends PureComponent {
     this.restoreOldDates = ::this.restoreOldDates;
     this.clearBackedupOldDates = ::this.clearBackedupOldDates;
     const options = {
-      ...defaultOptions,
-      ...props.options
+      ...defaultProps,
+      ...props
     };
     this.state = {
       showFlyout: false,
@@ -50,10 +50,9 @@ export default class ReactDateRangePicker extends PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     const nextState = {
       ...prevState,
-      ...nextProps,
       options: {
-        ...defaultOptions,
-        ...nextProps.options
+        ...defaultProps,
+        ...nextProps
       }
     };
     const theme = nextState.options.theme;
@@ -104,18 +103,21 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   setToDate(date) {
+    let nextState;
     if (date.isBefore(this.state.fromDate, "date")) {
-      this.setState({
+      nextState = {
         fromDate: date.startOf("day"),
-        toDate: date.endOf("day"),
-        rangeIsDirty: true
-      });
+        toDate: date.endOf("day")
+      };
     } else {
-      this.setState({
-        toDate: date.endOf("day"),
-        rangeIsDirty: true
-      });
+      nextState = {
+        toDate: date.endOf("day")
+      };
     }
+    this.setState({
+      ...nextState,
+      rangeIsDirty: true
+    });
   }
 
   backupOldDates() {
@@ -139,13 +141,11 @@ export default class ReactDateRangePicker extends PureComponent {
   applyRange() {
     const { fromDate, toDate } = this.state;
     const { format } = this.state.options;
-    this.setState({
-      selectedRange: `${fromDate.format(format)} - ${toDate.format(format)}`
-    });
-    this.props.options.onRangeSelected({
+    this.onRangeSelected(
       fromDate,
-      toDate
-    });
+      toDate,
+      `${fromDate.format(format)} - ${toDate.format(format)}`
+    );
     this.setDefaultFlyoutClassName();
     this.clearBackedupOldDates();
   }
@@ -155,20 +155,20 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   clear() {
-    this.clearSelectedRange();
     this.setDefaultFlyoutClassName();
-    this.props.options.onRangeSelected({
-      fromDate: undefined,
-      toDate: undefined
-    });
+    this.onRangeSelected();
     this.clearBackedupOldDates();
   }
 
-  clearSelectedRange() {
-    this.setState({
-      fromDate: undefined,
-      toDate: undefined,
-      selectedRange: ""
+  onRangeSelected(
+    fromDate = undefined,
+    toDate = undefined,
+    selectedRange = ""
+  ) {
+    this.setState({ selectedRange });
+    this.props.onRangeSelected({
+      fromDate,
+      toDate
     });
   }
 
@@ -242,20 +242,18 @@ export default class ReactDateRangePicker extends PureComponent {
     );
   }
 }
-
+/* eslint-disable react/no-unused-prop-types*/
 ReactDateRangePicker.propTypes = {
-  options: PropTypes.shape({
-    open: PropTypes.string,
-    theme: PropTypes.string,
-    startDate: PropTypes.any,
-    endDate: PropTypes.any,
-    onRangeSelected: PropTypes.func.isRequired,
-    format: PropTypes.string
-  })
+  open: PropTypes.string,
+  theme: PropTypes.string,
+  startDate: PropTypes.any,
+  endDate: PropTypes.any,
+  onRangeSelected: PropTypes.func.isRequired,
+  format: PropTypes.string
 };
-
+/* eslint-enable react/no-unused-prop-types*/
 ReactDateRangePicker.defaultProps = {
-  options: defaultOptions
+  options: defaultProps
 };
 
 /* istanbul ignore next */

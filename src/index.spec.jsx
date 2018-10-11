@@ -8,7 +8,7 @@ describe("daterangepicker component", () => {
     options = {};
   beforeEach(() => {
     options.onRangeSelected = onRangeSelectedMock;
-    wrapper = shallow(<ReactDateRangePicker options={options} />);
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
   });
   it("should render properly", () => {
     expect(wrapper).toHaveLength(1);
@@ -113,7 +113,7 @@ describe("should set state.showFlyout properly when insideOutSideClickHandler is
     options = {};
   beforeEach(() => {
     options.onRangeSelected = jest.fn();
-    wrapper = shallow(<ReactDateRangePicker options={options} />);
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
   });
 
   it("should set the value to true when inside click is true", () => {
@@ -167,7 +167,7 @@ describe("should set state.showFlyout properly when insideOutSideClickHandler is
 describe("options.open tests", () => {
   const shallowRenderWithOptions = options => {
     options.onRangeSelected = jest.fn();
-    return shallow(<ReactDateRangePicker options={options} />);
+    return shallow(<ReactDateRangePicker {...options} />);
   };
   it("should not have open classes in html", () => {
     const wrapper = shallowRenderWithOptions({
@@ -193,7 +193,7 @@ describe("options.open tests", () => {
 describe("should set range if startDate and endDate is passed as props", () => {
   const shallowRenderWithOptions = options => {
     options.onRangeSelected = jest.fn();
-    return shallow(<ReactDateRangePicker options={options} />);
+    return shallow(<ReactDateRangePicker {...options} />);
   };
 
   it("if dates are passed as moment objects", () => {
@@ -222,7 +222,7 @@ describe("should set range if startDate and endDate is passed as props", () => {
 describe("should not set range if startDate or endDate is not passed as props", () => {
   const shallowRenderWithOptions = options => {
     options.onRangeSelected = jest.fn();
-    return shallow(<ReactDateRangePicker options={options} />);
+    return shallow(<ReactDateRangePicker {...options} />);
   };
 
   it("if startDate is passed as moment objects", () => {
@@ -285,7 +285,7 @@ describe("setDefaultFlyoutClassName method", () => {
     options = {};
   beforeEach(() => {
     options.onRangeSelected = onRangeSelectedMock;
-    wrapper = shallow(<ReactDateRangePicker options={options} />);
+    wrapper = shallow(<ReactDateRangePicker {...options} />);
   });
 
   it("setDefaultFlyoutClassName should set the state of component properly", () => {

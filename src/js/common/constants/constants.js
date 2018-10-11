@@ -1,4 +1,4 @@
-export const defaultOptions = {
+export const defaultProps = {
   open: "left",
   theme: "light",
   format: "DD.MM.YYYY",

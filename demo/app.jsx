@@ -5,11 +5,7 @@ export default class DemoApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      daterangepickerOptions: {
-        open: "right",
-        theme: "dark",
-        onRangeSelected: () => {}
-      }
+      daterangepickerOptions: {}
     };
   }
 
@@ -24,7 +20,11 @@ export default class DemoApp extends Component {
           <div className="col-md-6 h-100">
             <div className="offset-md-3 col-md-6 row">
               <ReactDateRangePicker
-                options={this.state.daterangepickerOptions}
+                open="left"
+                theme="dark"
+                startDate="07.12.2018"
+                endDate="07.12.2018"
+                onRangeSelected={() => {}}
               />
             </div>
           </div>
