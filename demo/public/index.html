@@ -23,6 +23,15 @@
         html,body,#app{
             height: 100%;
         }
+        .radio-button {
+            position: absolute;
+            left: -25px;
+            top: 5px;
+            width: 100%;
+        }
+        .radio-wrapper{
+            position: relative;
+        }
         .navbar{
             margin-bottom: 20px;
             border: 1px solid #ddd;
@@ -30,6 +39,25 @@
         }
         .border-right{
             border-right: 1px solid #999;
+        }
+        .fork-github-ribbon {
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: white transparent white transparent;
+            position: fixed;
+            transform: rotate(45deg);
+            right: -78px;
+            top: 32px;
+            z-index: 12;
+            width: 250px;
+            text-align: center;
+        }
+        .fork-github-ribbon a {
+            color: white;
         }
     </style>
     <title>React Date Range Picker</title>
