@@ -28,6 +28,8 @@
     display: none;
     border-radius: 5px;
     border-color: var(--daterangepicker-flyout-border-color);
+    border-width: 1px;
+    border-style: solid;
     color: var(--daterangepicker-flyout-foreground);
     font-size: var(--daterangepicker-font-size);
     z-index: 2;
@@ -61,6 +63,7 @@
         position: relative;
         display: inline-block;
         box-shadow: none;
+        border-width: 2px;
 
         &:before,
         &:after {
