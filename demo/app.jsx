@@ -6,8 +6,14 @@ export default class DemoApp extends Component {
     super(props);
     this.onThemeChange = ::this.onThemeChange;
     this.onPositionChange = ::this.onPositionChange;
+    this.onAutoApplyChange = ::this.onAutoApplyChange;
+    this.onAlwaysOpenChange = ::this.onAlwaysOpenChange;
     this.state = {
-      theme: "dark"
+      theme: "dark",
+      position: "left",
+      startDate: "07/12/2018",
+      endDate: "07/02/2019",
+      format: "DD/MM/YYYY"
     };
   }
 
@@ -23,6 +29,24 @@ export default class DemoApp extends Component {
   onPositionChange(e) {
     this.setState({
       position: e.target.value
+    });
+    setTimeout(() => {
+      this.forceUpdate();
+    }, 0);
+  }
+
+  onAutoApplyChange(e) {
+    this.setState({
+      autoApply: e.target.checked
+    });
+    setTimeout(() => {
+      this.forceUpdate();
+    }, 0);
+  }
+
+  onAlwaysOpenChange(e) {
+    this.setState({
+      alwaysOpen: e.target.checked
     });
     setTimeout(() => {
       this.forceUpdate();
@@ -103,6 +127,44 @@ export default class DemoApp extends Component {
                   </label>
                 </div>
               </div>
+              <div className="row">
+                <label className="label form-check-label col-md-12">
+                  <b>Auto Apply</b>
+                </label>
+                <div className="radio col-md-6">
+                  <label htmlFor="auto-apply" className="radio-wrapper">
+                    <input
+                      type="checkbox"
+                      name="position"
+                      value="true"
+                      checked={this.state.autoApply}
+                      onChange={this.onAutoApplyChange}
+                      id="auto-apply"
+                      className="radio-button"
+                    />
+                    Auto Apply
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <label className="label form-check-label col-md-12">
+                  <b>AlwaysOpen</b>
+                </label>
+                <div className="radio col-md-6">
+                  <label htmlFor="always-open" className="radio-wrapper">
+                    <input
+                      type="checkbox"
+                      name="always-open"
+                      value="true"
+                      checked={this.state.alwaysOpen}
+                      onChange={this.onAlwaysOpenChange}
+                      id="always-open"
+                      className="radio-button"
+                    />
+                    Always Open
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
           <div className="col-md-6 h-100">
@@ -110,9 +172,11 @@ export default class DemoApp extends Component {
               <ReactDateRangePicker
                 open={this.state.position}
                 theme={this.state.theme}
-                startDate="07.12.2018"
-                endDate="07.12.2018"
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
                 onRangeSelected={() => {}}
+                autoApply={this.state.autoApply}
+                alwaysOpen={this.state.alwaysOpen}
               />
             </div>
           </div>

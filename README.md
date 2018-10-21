@@ -61,6 +61,12 @@ This is a work in progress and you are always welcome to help me going forward w
 		First working draft of the component is in action. 
 	</ul>
 </li>
+<li>
+	Date: 21 Oct 2018
+	<ul>
+		Added two more options alwaysOpen and autoApply
+	</ul>
+</li>
 </ul>
 </div>
 
@@ -170,6 +176,20 @@ Currently, very minimum number of options are available but I will keep on devel
             <td>The theme i.e background/font color of the input box and flyout</td>
             <td>'light'</td>
             <td>'light','dark' See <a href="theming">theme</a> section below for more/custom theming</td>
+        </tr>
+        <tr>
+            <td>alwaysOpen</td>
+            <td>boolean</td>
+            <td>Will keep the calendars always open. And will hide the main input box showing range. Will hide the cancel button from the popup</td>
+            <td>false</td>
+            <td>true, false</td>
+        </tr>
+        <tr>
+            <td>autoApply</td>
+            <td>boolean</td>
+            <td>Will automatically apply range as soon as user selects date from right calendar. Will hide apply button from the bottom of popup</td>
+            <td>false</td>
+            <td>true, false</td>
         </tr>
     </tbody>
 </table>

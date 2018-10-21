@@ -3,7 +3,9 @@ export const defaultProps = {
   theme: "light",
   format: "DD.MM.YYYY",
   startDate: "",
-  endDate: ""
+  endDate: "",
+  autoApply: false,
+  alwyasOpen: false
 };
 
 export const colors = {

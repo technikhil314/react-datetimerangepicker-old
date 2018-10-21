@@ -2,6 +2,7 @@ import ReactDateRangePicker from ".";
 import { shallow } from "enzyme";
 import React from "react";
 import moment from "moment";
+import OutsideClickDetector from "@common/insideOutsideClickDetector";
 describe("daterangepicker component", () => {
   let wrapper,
     onRangeSelectedMock = jest.fn(),
@@ -571,5 +572,160 @@ describe("clear method", () => {
       fromDate: undefined,
       toDate: undefined
     });
+  });
+});
+
+describe("autoapply options test", () => {
+  const shallowRenderWithOptions = options => {
+    options.onRangeSelected = jest.fn();
+    return shallow(<ReactDateRangePicker {...options} />);
+  };
+
+  it("should not render apply button if autoApply is true", () => {
+    const wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: true,
+      alwaysOpen: false
+    });
+    const applyButton = wrapper.find(".daterangepicker__control--apply");
+    expect(applyButton).toHaveLength(0);
+  });
+
+  it("should call onRangeSelected after setting todate if autoApply is true", () => {
+    let options = {
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      format: "DD/MM/YYYY",
+      autoApply: true,
+      alwaysOpen: false
+    };
+    const wrapper = shallowRenderWithOptions(options);
+    let daterangepickerInput = wrapper.find(".daterangepicker__input");
+    daterangepickerInput.simulate("click");
+    wrapper.setState({
+      showFlyout: true
+    });
+    wrapper.update();
+    let flyout = wrapper.find(".daterangepicker__flyout");
+    expect(flyout.prop("className")).toBe(
+      "daterangepicker__flyout daterangepicker__flyout-open daterangepicker__flyout-open-left"
+    );
+    wrapper.instance().setToDate(moment());
+    expect(options.onRangeSelected).toHaveBeenCalledTimes(1);
+    wrapper.update();
+    expect(wrapper.state("showFlyout")).toBe(false);
+  });
+
+  it("should render apply button if autoApply is false or not passed", () => {
+    let wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false,
+      alwaysOpen: false
+    });
+    let applyButton = wrapper.find(".daterangepicker__control--apply");
+    expect(applyButton).toHaveLength(1);
+    wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      alwaysOpen: false
+    });
+    applyButton = wrapper.find(".daterangepicker__control--apply");
+    expect(applyButton).toHaveLength(1);
+  });
+});
+
+describe("alwaysopen options test", () => {
+  const shallowRenderWithOptions = options => {
+    options.onRangeSelected = jest.fn();
+    return shallow(<ReactDateRangePicker {...options} />);
+  };
+
+  it("should not render cancel button if alwaysOpen is true", () => {
+    const wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false,
+      alwaysOpen: true
+    });
+    const cancelButton = wrapper.find(".daterangepicker__control--cancel");
+    expect(cancelButton).toHaveLength(0);
+  });
+
+  it("should not render insideoutsideclickhandler if alwaysOpen is true", () => {
+    const wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false,
+      alwaysOpen: true
+    });
+    const insideoutsideclickdetector = wrapper.find(OutsideClickDetector);
+    expect(insideoutsideclickdetector).toHaveLength(0);
+    const flyoutWrapper = wrapper.find(".daterangepicker__flyout-always-open");
+    expect(flyoutWrapper).toHaveLength(1);
+  });
+
+  it("should render insideoutsideclickhandler if alwaysOpen is false or not passed", () => {
+    let wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false,
+      alwaysOpen: false
+    });
+    let insideoutsideclickdetector = wrapper.find(OutsideClickDetector);
+    expect(insideoutsideclickdetector).toHaveLength(1);
+    wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false
+    });
+    insideoutsideclickdetector = wrapper.find(OutsideClickDetector);
+    expect(insideoutsideclickdetector).toHaveLength(1);
+  });
+
+  it("should render cancel button if alwaysOpen is false or not passed", () => {
+    let wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY",
+      autoApply: false,
+      alwaysOpen: false
+    });
+    let cancelButton = wrapper.find(".daterangepicker__control--cancel");
+    expect(cancelButton).toHaveLength(1);
+    wrapper = shallowRenderWithOptions({
+      open: "left",
+      theme: "dark",
+      startDate: "07/08/1990",
+      endDate: "07/08/1991",
+      format: "DD/MM/YYYY"
+    });
+    cancelButton = wrapper.find(".daterangepicker__control--cancel");
+    expect(cancelButton).toHaveLength(1);
   });
 });

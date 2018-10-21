@@ -117,10 +117,20 @@ export default class ReactDateRangePicker extends PureComponent {
         toDate: date.endOf("day")
       };
     }
-    this.setState({
-      ...nextState,
-      rangeIsDirty: true
-    });
+    if (this.state.options.autoApply) {
+      this.setState(
+        {
+          ...nextState,
+          rangeIsDirty: true
+        },
+        this.applyRange
+      );
+    } else {
+      this.setState({
+        ...nextState,
+        rangeIsDirty: true
+      });
+    }
   }
 
   backupOldDates() {
@@ -186,40 +196,33 @@ export default class ReactDateRangePicker extends PureComponent {
   }
 
   //Rendering logic
-  render() {
+  renderFlyout() {
+    const { format, autoApply, alwaysOpen } = this.state.options;
     let flyoutClassNames = classNames({
       daterangepicker__flyout: true,
       ["daterangepicker__flyout-open daterangepicker__flyout-open-" +
-      this.state.options.open]: this.state.showFlyout
+      this.state.options.open]: this.state.showFlyout,
+      "daterangepicker__flyout-always-open": alwaysOpen
     });
     const { fromDate, toDate, rangeIsDirty } = this.state;
-    const { format } = this.state.options;
     return (
-      <OutsideClickDetector
-        clickHandler={this.insideOutSideClickHandler}
-        className="daterangepicker"
-      >
-        <input
-          type="text"
-          className="daterangepicker__input"
-          defaultValue={this.state.selectedRange}
+      <div className={flyoutClassNames}>
+        <Calendar
+          date={fromDate}
+          format={format}
+          fromDate={fromDate}
+          toDate={toDate}
+          onDateSelected={this.setFromDate}
         />
-        <div className={flyoutClassNames}>
-          <Calendar
-            date={fromDate}
-            format={format}
-            fromDate={fromDate}
-            toDate={toDate}
-            onDateSelected={this.setFromDate}
-          />
-          <Calendar
-            date={toDate}
-            format={format}
-            fromDate={fromDate}
-            toDate={toDate}
-            onDateSelected={this.setToDate}
-          />
-          <div className="daterangepicker__controls-wrapper">
+        <Calendar
+          date={toDate}
+          format={format}
+          fromDate={fromDate}
+          toDate={toDate}
+          onDateSelected={this.setToDate}
+        />
+        <div className="daterangepicker__controls-wrapper">
+          {!autoApply && (
             <button
               className="daterangepicker__control daterangepicker__control--apply"
               onClick={this.applyRange}
@@ -227,6 +230,8 @@ export default class ReactDateRangePicker extends PureComponent {
             >
               Apply
             </button>
+          )}
+          {!alwaysOpen && (
             <button
               className="daterangepicker__control daterangepicker__control--cancel"
               onClick={this.cancel}
@@ -234,15 +239,39 @@ export default class ReactDateRangePicker extends PureComponent {
             >
               Cancel
             </button>
-            <button
-              className="daterangepicker__control daterangepicker__control--clear"
-              onClick={this.clear}
-              disabled={!(fromDate && toDate)}
-            >
-              Clear
-            </button>
-          </div>
+          )}
+          <button
+            className="daterangepicker__control daterangepicker__control--clear"
+            onClick={this.clear}
+            disabled={!(fromDate && toDate)}
+          >
+            Clear
+          </button>
         </div>
+      </div>
+    );
+  }
+  renderRangeInput() {
+    return (
+      <input
+        type="text"
+        className="daterangepicker__input"
+        defaultValue={this.state.selectedRange}
+      />
+    );
+  }
+  render() {
+    const { alwaysOpen } = this.state.options;
+    if (alwaysOpen) {
+      return <div className="daterangepicker">{this.renderFlyout()}</div>;
+    }
+    return (
+      <OutsideClickDetector
+        clickHandler={this.insideOutSideClickHandler}
+        className="daterangepicker"
+      >
+        {this.renderRangeInput()}
+        {this.renderFlyout()}
       </OutsideClickDetector>
     );
   }
@@ -254,7 +283,9 @@ ReactDateRangePicker.propTypes = {
   startDate: PropTypes.any,
   endDate: PropTypes.any,
   onRangeSelected: PropTypes.func.isRequired,
-  format: PropTypes.string
+  format: PropTypes.string,
+  autoApply: PropTypes.bool,
+  alwaysOpen: PropTypes.bool
 };
 /* eslint-enable react/no-unused-prop-types*/
 ReactDateRangePicker.defaultProps = {

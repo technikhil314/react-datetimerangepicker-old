@@ -55,6 +55,18 @@
         top: -8px;
         left: 12px;
     }
+
+    &-always-open {
+        top: 0;
+        position: relative;
+        display: inline-block;
+        box-shadow: none;
+
+        &:before,
+        &:after {
+            display: none;
+        }
+    }
 }
 
 &__flyout-open {

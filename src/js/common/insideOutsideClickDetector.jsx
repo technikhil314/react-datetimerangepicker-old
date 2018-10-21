@@ -9,13 +9,14 @@ export default class InsideOutsideClickDetector extends Component {
   componentDidMount() {
     document.addEventListener("click", this.handleDocumentClick);
   }
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleDocumentClick);
+  }
   handleDocumentClick(event) {
-    let current = event.target;
-    event.preventDefault();
-    event.stopPropagation();
-    if (event.nativeEvent && event.nativeEvent.stopImmediatePropagation) {
-      event.nativeEvent.stopImmediatePropagation();
+    if (!this.node) {
+      return false;
     }
+    let current = event.target;
     if (this.node.compareDocumentPosition) {
       if (
         this.node.compareDocumentPosition(current) &
