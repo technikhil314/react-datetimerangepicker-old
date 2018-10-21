@@ -1,6 +1,8 @@
 import InsideOutsideClickDetector from "./insideOutsideClickDetector";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 import React from "react";
+import ReactDOM from "react-dom";
+import simulant from "simulant";
 
 describe("insideoutsideclickdetector component", () => {
   let wrapper,
@@ -32,7 +34,7 @@ describe("insideoutsideclickdetector component", () => {
     const mockAddEventListener = jest.fn((event, cb) => {
       map[event] = cb;
     });
-    document.addEventListener = mockAddEventListener;
+    document.body.addEventListener = mockAddEventListener;
     wrapper = shallow(
       <InsideOutsideClickDetector clickHandler={mockClickHandler}>
         <div>Demo</div>
@@ -40,41 +42,59 @@ describe("insideoutsideclickdetector component", () => {
     );
     expect(mockAddEventListener).toHaveBeenCalled();
   });
+});
 
-  describe("should handle document click", () => {
-    let wrapper,
-      mockClickHandler = jest.fn();
-    beforeEach(() => {
-      wrapper = mount(
+describe("should handle document click", () => {
+  let mockClickHandler = null;
+  beforeEach(() => {
+    mockClickHandler = jest.fn();
+    ReactDOM.render(
+      <div>
+        <button id="outButton" />
         <InsideOutsideClickDetector clickHandler={mockClickHandler}>
           <button className="button" id="button">
             Demo
           </button>
         </InsideOutsideClickDetector>
-      );
-    });
+      </div>,
+      document.body
+    );
+  });
 
-    it("Should detect inside click with compareDocumentPosition", () => {
-      const button = wrapper.find("#button");
-      expect(button).toHaveLength(1);
-      button.simulate("click");
+  it("Should detect inside click with compareDocumentPosition", done => {
+    simulant.fire(document.body.querySelector("#button"), "click");
+    setTimeout(() => {
       expect(mockClickHandler).toHaveBeenCalledWith(true);
-    });
+      done();
+    }, 3000);
+  });
 
-    it("Should detect inside click with contains", () => {
-      const button = wrapper.find("#button");
-      expect(button).toHaveLength(1);
-      wrapper.instance().node.compareDocumentPosition = undefined;
-      button.simulate("click");
+  it("Should detect inside click with contains", done => {
+    let button = document.body.querySelector("#button");
+    button.compareDocumentPosition = null;
+    simulant.fire(button, "click");
+    setTimeout(() => {
       expect(mockClickHandler).toHaveBeenCalledWith(true);
-    });
+      done();
+    }, 3000);
+  });
 
-    it("Should detect inside click with while loop", () => {
-      const button = wrapper.find("#button");
-      expect(button).toHaveLength(1);
-      wrapper.instance().node.compareDocumentPosition = wrapper.instance().node.contains = undefined;
-      button.simulate("click");
+  it("Should detect inside click with while loop", done => {
+    let button = document.body.querySelector("#button");
+    button.compareDocumentPosition = button.contains = null;
+    simulant.fire(button, "click");
+    setTimeout(() => {
       expect(mockClickHandler).toHaveBeenCalledWith(true);
-    });
+      done();
+    }, 3000);
+  });
+
+  it("Should detect outside click", done => {
+    let button = document.body.querySelector("#outButton");
+    simulant.fire(button, "click");
+    setTimeout(() => {
+      expect(mockClickHandler).toHaveBeenCalledWith(false);
+      done();
+    }, 3000);
   });
 });

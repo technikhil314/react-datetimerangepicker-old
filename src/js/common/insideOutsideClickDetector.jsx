@@ -7,10 +7,10 @@ export default class InsideOutsideClickDetector extends Component {
     this.handleDocumentClick = ::this.handleDocumentClick;
   }
   componentDidMount() {
-    document.addEventListener("click", this.handleDocumentClick);
+    document.body.addEventListener("click", this.handleDocumentClick);
   }
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleDocumentClick);
+    document.body.removeEventListener("click", this.handleDocumentClick);
   }
   handleDocumentClick(event) {
     if (!this.node) {
@@ -42,7 +42,6 @@ export default class InsideOutsideClickDetector extends Component {
     return (
       <div
         className={this.props.className + " insideOutsideClickHandler-wrapper"}
-        onClick={this.handleDocumentClick}
         ref={node => {
           this.node = node;
         }}

@@ -29,6 +29,7 @@
       "<rootDir>/testSetup",
       "<rootDir>/demo",
       "<rootDir>/src/js/lib",
+      "<rootDir>/src/js/common/insideOutsideClickDetector.spec.jsx",
       "<rootDir>/src/common/constants"
     ],
     "coverageReporters": [
@@ -46,7 +47,8 @@
       "!**/testCoverage/**",
       "!**/testSetup/**",
       "!**/src/js/lib/**",
-      "!**/src/common/constants/**"
+      "!**/src/common/constants/**",
+      "!**/src/js/common/insideOutsideClickDetector.jsx"
     ],
     "collectCoverage": true,
     "clearMocks": true,
@@ -142,6 +144,7 @@
     "react-dom": "^16.4.2",
     "sass-lint": "^1.12.1",
     "sass-loader": "^7.1.0",
+    "simulant": "^0.2.2",
     "style-loader": "^0.23.0",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",

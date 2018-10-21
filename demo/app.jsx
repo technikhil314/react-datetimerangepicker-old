@@ -174,7 +174,10 @@ export default class DemoApp extends Component {
                 theme={this.state.theme}
                 startDate={this.state.startDate}
                 endDate={this.state.endDate}
-                onRangeSelected={() => {}}
+                onRangeSelected={range => {
+                  /* eslint-disable no-console*/
+                  console.log(range);
+                }}
                 autoApply={this.state.autoApply}
                 alwaysOpen={this.state.alwaysOpen}
               />

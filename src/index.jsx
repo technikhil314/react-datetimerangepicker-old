@@ -198,13 +198,13 @@ export default class ReactDateRangePicker extends PureComponent {
   //Rendering logic
   renderFlyout() {
     const { format, autoApply, alwaysOpen } = this.state.options;
+    const { fromDate, toDate, rangeIsDirty, showFlyout } = this.state;
     let flyoutClassNames = classNames({
       daterangepicker__flyout: true,
       ["daterangepicker__flyout-open daterangepicker__flyout-open-" +
-      this.state.options.open]: this.state.showFlyout,
+      this.state.options.open]: showFlyout,
       "daterangepicker__flyout-always-open": alwaysOpen
     });
-    const { fromDate, toDate, rangeIsDirty } = this.state;
     return (
       <div className={flyoutClassNames}>
         <Calendar
